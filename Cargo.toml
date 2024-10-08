@@ -1,6 +1,6 @@
 [package]
 name = "ashscript-types"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 authors=["Ashscript Contributors"]
 description="Types for Ashcript Game game and action states"
@@ -11,3 +11,4 @@ license = "MIT OR Apache-2.0"
 hashbrown = "0.15.0"
 hexx = "0.18.0"
 enum-map = "2.7.3"
+lazy_static = "1.5.0"

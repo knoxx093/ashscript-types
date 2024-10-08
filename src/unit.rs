@@ -1,5 +1,7 @@
+use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
+use lazy_static::lazy_static;
 
 use crate::chunk::Chunk;
 
@@ -8,6 +10,8 @@ pub struct Unit {
     pub id: u32,
     pub health: u32,
     pub hex: Hex,
+    pub energy: u32,
+    pub age: u32,
 }
 
 impl Unit {
@@ -21,3 +25,12 @@ impl Unit {
 }
 
 pub type UnitsByChunk = HashMap<u32, Chunk>;
+
+#[derive(enum_map::Enum)]
+pub enum UnitPart {
+    Ranged,
+    Harvest,
+    Generate,
+    Work,
+    Battery,
+}
