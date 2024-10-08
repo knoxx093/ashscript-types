@@ -2,6 +2,10 @@
 name = "ashscript-types"
 version = "0.1.0"
 edition = "2021"
+authors=["Ashscript Contributors"]
+description="Types for Ashcript Game game and action states"
+homepage="https://github.com/Ashscript-Game/ashscript-types"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 hashbrown = "0.15.0"
