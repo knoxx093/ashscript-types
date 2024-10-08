@@ -1,0 +1,9 @@
+[package]
+name = "ashscript-types"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hashbrown = "0.15.0"
+hexx = "0.18.0"
+enum-map = "2.7.3"
