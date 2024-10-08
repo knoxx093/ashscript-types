@@ -1,7 +1,6 @@
 use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
-use lazy_static::lazy_static;
 
 use crate::chunk::Chunk;
 
