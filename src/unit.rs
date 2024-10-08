@@ -7,10 +7,12 @@ use crate::chunk::Chunk;
 #[derive(Default)]
 pub struct Unit {
     pub id: u32,
+    pub owner_id: u32,
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,
     pub age: u32,
+    pub body: UnitBody,
 }
 
 impl Unit {
@@ -24,6 +26,8 @@ impl Unit {
 }
 
 pub type UnitsByChunk = HashMap<u32, Chunk>;
+
+pub type UnitBody = EnumMap<UnitPart, u32>;
 
 #[derive(enum_map::Enum)]
 pub enum UnitPart {
