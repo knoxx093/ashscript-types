@@ -29,19 +29,19 @@ impl Unit {
         ((self.body[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32 + UNIT_BASE_AGE
     }
 
-    pub fn range(self) -> u32 {
+    pub fn range(&self) -> u32 {
         self.body[UnitPart::Ranged]
     }
     
-    pub fn damage(self) -> u32 {
+    pub fn damage(&self) -> u32 {
         self.body[UnitPart::Ranged]
     }
     
-    pub fn attack_cost(self) -> u32 {
+    pub fn attack_cost(&self) -> u32 {
         self.body[UnitPart::Ranged]
     }
     
-    pub fn weight(self) -> u32 {
+    pub fn weight(&self) -> u32 {
         let mut weight = 0;
     
         for (part, _) in UNIT_PART_WEIGHTS.iter() {
