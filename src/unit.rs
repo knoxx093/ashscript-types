@@ -26,7 +26,7 @@ impl Unit {
     }
 }
 
-pub type UnitsByChunk = HashMap<u32, Chunk>;
+pub type UnitsByChunk = HashMap<u32, u32>;
 
 pub type UnitBody = EnumMap<UnitPart, u32>;
 
