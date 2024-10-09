@@ -1,10 +1,11 @@
 use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
+use serde::Serialize;
 
 use crate::chunk::Chunk;
 
-#[derive(Default)]
+#[derive(Default, Serialize)]
 pub struct Unit {
     pub id: u32,
     pub owner_id: u32,
@@ -29,7 +30,7 @@ pub type UnitsByChunk = HashMap<u32, Chunk>;
 
 pub type UnitBody = EnumMap<UnitPart, u32>;
 
-#[derive(enum_map::Enum)]
+#[derive(enum_map::Enum, Serialize)]
 pub enum UnitPart {
     Ranged,
     Harvest,
