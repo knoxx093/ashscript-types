@@ -7,15 +7,15 @@ pub struct Turret {
 }
 
 impl Turret {
-    pub fn turret_attack_cost(&self) -> u32 {
-        self.turret_range() + self.turret_damage()
+    pub fn attack_cost(&self) -> u32 {
+        self.range() + self.damage()
     }
     
-    pub fn turret_range(&self) -> u32 {
+    pub fn range(&self) -> u32 {
         1
     }
     
-    pub fn turret_damage(&self) -> u32 {
+    pub fn damage(&self) -> u32 {
         1
     }
 }
