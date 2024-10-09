@@ -5,7 +5,7 @@ pub mod resource;
 pub mod terrain;
 pub mod structures;
 pub mod actions;
-pub mod constants;
 pub mod map;
+pub mod constants;
 
 fn main() {}

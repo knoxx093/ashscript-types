@@ -1,2 +1,29 @@
-    /// allows for a rectangle with 2 025 000 000 tiles
-    pub const MAX_WIDTH_HEIGHT: i32 = 45000;
+use glam::Vec2;
+use hexx::{Hex, HexLayout, HexOrientation};
+use serde::Serialize;
+
+use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, unit::Unit};
+
+#[derive(Default, Serialize)]
+pub struct Map {
+    pub chunks: Chunks,
+}
+
+impl Map {
+    pub fn new() -> Self {
+        Self {
+            ..Default::default()
+        }
+    }
+
+    pub fn chunk_at(&self, hex: &Hex) -> Option<&Chunk> {
+        let chunk_hex = hex.to_lower_res(CHUNK_SIZE);
+        self.chunks.get(&chunk_hex)
+    }
+
+    pub fn unit_at(&self, hex: &Hex) -> Option<&Unit> {
+        let chunk = self.chunk_at(hex)?;
+
+        chunk.units.get(hex)
+    }
+}

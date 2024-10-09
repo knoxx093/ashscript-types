@@ -3,7 +3,7 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{chunk::Chunk, constants::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_PART_WEIGHTS}};
+use crate::{chunk::Chunk, constants::{general::UNIT_PART_WEIGHTS, unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE}}};
 
 pub type Units = HashMap<Hex, Unit>;
 
