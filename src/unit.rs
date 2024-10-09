@@ -3,7 +3,7 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::chunk::Chunk;
+use crate::{chunk::Chunk, constants::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_PART_WEIGHTS}};
 
 #[derive(Default, Serialize)]
 pub struct Unit {
@@ -23,6 +23,32 @@ impl Unit {
             hex,
             ..Default::default()
         }
+    }
+
+    pub fn max_age(&self) -> u32 {
+        ((self.body[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32 + UNIT_BASE_AGE
+    }
+
+    pub fn range(self: &Unit) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
+    
+    pub fn damage(self: &Unit) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
+    
+    pub fn attack_cost(self: &Unit) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
+    
+    pub fn weight(self: &Unit) -> u32 {
+        let mut weight = 0;
+    
+        for (part, _) in UNIT_PART_WEIGHTS.iter() {
+            weight += UNIT_PART_WEIGHTS[part]
+        }
+        
+        weight
     }
 }
 
