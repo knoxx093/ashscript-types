@@ -5,6 +5,8 @@ use serde::Serialize;
 
 use crate::{chunk::Chunk, constants::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_PART_WEIGHTS}};
 
+pub type Units = HashMap<Hex, Unit>;
+
 #[derive(Default, Serialize)]
 pub struct Unit {
     pub id: u32,
@@ -51,8 +53,6 @@ impl Unit {
         weight
     }
 }
-
-pub type UnitsByChunk = HashMap<u32, u32>;
 
 pub type UnitBody = EnumMap<UnitPart, u32>;
 

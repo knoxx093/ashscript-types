@@ -6,5 +6,6 @@ pub mod terrain;
 pub mod structures;
 pub mod actions;
 pub mod constants;
+pub mod map;
 
 fn main() {}

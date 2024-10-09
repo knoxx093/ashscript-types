@@ -1,5 +1,10 @@
+use hashbrown::HashMap;
 use hexx::Hex;
+use serde::Serialize;
 
+pub type Turrets = HashMap<Hex, Turret>;
+
+#[derive(Serialize, Default)]
 pub struct Turret {
     pub owner_id: u32,
     pub energy: u32,
