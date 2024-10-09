@@ -2,7 +2,7 @@ use hexx::Hex;
 
 use crate::resource::Resource;
 
-// REMINDER: These are player-generated intents
+// REMINDER: These are intents that the server validates and wants executed
 
 pub struct UnitMove {
     pub unit_id: u32,
@@ -13,11 +13,14 @@ pub struct UnitMove {
 pub struct UnitAttack {
     pub unit_id: u32,
     pub target_id: u32,
+    pub damage: u32,
 }
 
 pub struct TurretAttack {
     pub turret_id: u32,
     pub target_id: u32,
+    pub damage: u32,
+    pub cost: u32,
 }
 
 pub struct FactorySpawn {
