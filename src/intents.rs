@@ -4,6 +4,16 @@ use crate::resource::Resource;
 
 // REMINDER: These are player-generated intents
 
+pub type Intents = Vec<Intent>;
+
+pub enum Intent {
+    UnitMove(UnitMove),
+    UnitAttack(UnitAttack),
+    TurretAttack(TurretAttack),
+    FactorySpawn(FactorySpawn),
+    ResourceTransfer(ResourceTransfer),
+}
+
 pub struct UnitMove {
     pub unit_id: u32,
     pub from: Hex,

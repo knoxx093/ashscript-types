@@ -4,6 +4,16 @@ use crate::resource::Resource;
 
 // REMINDER: These are intents that the server validates and wants executed
 
+pub type Actions = Vec<Action>;
+
+pub enum Action {
+    UnitMove(UnitMove),
+    UnitAttack(UnitAttack),
+    TurretAttack(TurretAttack),
+    FactorySpawn(FactorySpawn),
+    ResourceTransfer(ResourceTransfer),
+}
+
 pub struct UnitMove {
     pub unit_id: u32,
     pub from: Hex,
