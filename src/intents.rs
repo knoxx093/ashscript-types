@@ -32,8 +32,6 @@ pub struct TurretAttack {
 
 pub struct FactorySpawn {
     pub factory_id: Id<FactorySpawn>,
-    // Why tf is this taking a unit id?
-    // IMO should be body, name, and potential other things
     pub unit_id: Id<Unit>,
     pub out: Hex,
 }

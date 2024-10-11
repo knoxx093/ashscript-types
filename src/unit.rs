@@ -31,15 +31,8 @@ impl Unit {
     }
 
     pub fn max_age(&self) -> u32 {
-        // TODO:
-        // Fix this, this formula does NOT do what you intended.
-        // y\ =\ \left(\left(x\ \cdot\ 10\right)^{0.4}\right)\ +\ 300
-        // Copy and paste the line above into desmos and you will see what I mean.
         ((self.body[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32 + UNIT_BASE_AGE
     }
-
-    // There were 3 functions here that returned things the user can calculate.
-    // We provide a basic API, nothing else prefferably.
 
     pub fn weight(&self) -> u32 {
         let mut weight = 0;
