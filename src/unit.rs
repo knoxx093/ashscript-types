@@ -50,6 +50,18 @@ impl Unit {
         
         weight
     }
+
+    pub fn range(&self) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
+    
+    pub fn damage(&self) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
+    
+    pub fn attack_cost(&self) -> u32 {
+        self.body[UnitPart::Ranged]
+    }
 }
 
 pub type UnitBody = EnumMap<UnitPart, u32>;
