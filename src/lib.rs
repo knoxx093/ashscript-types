@@ -8,6 +8,7 @@ pub mod actions;
 pub mod map;
 pub mod id_type;
 pub mod constants;
+pub mod player;
 
 pub type IdType = String;
 

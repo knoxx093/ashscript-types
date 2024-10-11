@@ -3,14 +3,14 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{chunk::Chunk, constants::{general::UNIT_PART_WEIGHTS, unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE}}, id_type::{Attackable, HasStorage}, IdType};
+use crate::{chunk::Chunk, constants::{general::UNIT_PART_WEIGHTS, unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE}}, id_type::{Attackable, HasStorage}, player::OwnerId, IdType};
 
 pub type Units = HashMap<Hex, Unit>;
 
 #[derive(Default, Serialize)]
 pub struct Unit {
     pub id: IdType,
-    pub owner: String,
+    pub owner_id: OwnerId,
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,
