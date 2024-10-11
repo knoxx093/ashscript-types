@@ -2,6 +2,8 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
+use crate::id_type::{Attackable, HasStorage};
+
 pub type Turrets = HashMap<Hex, Turret>;
 
 #[derive(Serialize, Default)]
@@ -10,6 +12,9 @@ pub struct Turret {
     pub energy: u32,
     pub hex: Hex,
 }
+
+impl Attackable for Turret {}
+impl HasStorage for Turret {}
 
 impl Turret {
     pub fn attack_cost(&self) -> u32 {
