@@ -1,6 +1,6 @@
 use hexx::Hex;
 
-use crate::{id_type::{Attackable, HasStorage, Id}, resource::Resource, structures::turret::Turret, unit::Unit, IdType};
+use crate::{id_type::{Attackable, HasStorage, Id}, resource::Resource, structures::turret::Turret, unit::{Unit, UnitBody}, IdType};
 
 // REMINDER: These are player-generated intents
 
@@ -32,8 +32,11 @@ pub struct TurretAttack {
 
 pub struct FactorySpawn {
     pub factory_id: Id<FactorySpawn>,
-    pub unit_id: Id<Unit>,
-    pub out: Hex,
+    pub body: UnitBody,
+    pub name: String,
+    /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
+    /// If out hexes are provided, sucessfully spawned units will be outputed to the first empty hex 
+    pub out: Option<Vec<Hex>>,
 }
 
 pub struct ResourceTransfer {
