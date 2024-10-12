@@ -1,14 +1,15 @@
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
+use uuid::Uuid;
 
-use crate::{id::UUID, objects::{HasHealth, HasId}, player::OwnerId};
+use crate::{objects::{HasHealth, HasId}, player::OwnerId};
 
 pub type Turrets = HashMap<Hex, Turret>;
 
 #[derive(Serialize, Default)]
 pub struct Turret {
-    pub id: UUID,
+    pub id: Uuid,
     pub owner_id: OwnerId,
     pub energy: u32,
     pub hex: Hex,
@@ -22,7 +23,7 @@ impl HasHealth for Turret {
 }
 
 impl HasId for Turret {
-    fn id(&self) -> UUID {
+    fn id(&self) -> Uuid {
         self.id
     }
 }

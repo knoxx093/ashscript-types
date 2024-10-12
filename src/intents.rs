@@ -1,6 +1,7 @@
 use hexx::Hex;
+use uuid::Uuid;
 
-use crate::{id::UUID, resource::Resource, structures::turret::Turret, unit::{Unit, UnitBody}, IdType};
+use crate::{resource::Resource, structures::turret::Turret, unit::{Unit, UnitBody}, IdType};
 
 // REMINDER: These are player-generated intents
 
@@ -23,23 +24,23 @@ pub enum IntentName {
 }
 
 pub struct UnitMove {
-    pub unit_id: UUID,
+    pub unit_id: Uuid,
     pub from: Hex,
     pub to: Hex,
 }
 
 pub struct UnitAttack {
-    pub unit_id: UUID,
-    pub target_id: UUID,
+    pub unit_id: Uuid,
+    pub target_id: Uuid,
 }
 
 pub struct TurretAttack {
-    pub turret_id: UUID,
-    pub target_id: UUID,
+    pub turret_id: Uuid,
+    pub target_id: Uuid,
 }
 
 pub struct FactorySpawn {
-    pub factory_id: UUID,
+    pub factory_id: Uuid,
     pub body: UnitBody,
     pub name: String,
     /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
@@ -50,6 +51,6 @@ pub struct FactorySpawn {
 pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
-    pub from_id: UUID,
-    pub to_id: UUID,
+    pub from_id: Uuid,
+    pub to_id: Uuid,
 }

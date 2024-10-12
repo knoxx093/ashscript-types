@@ -2,6 +2,7 @@ use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
+use uuid::Uuid;
 
 use crate::{
     chunk::Chunk,
@@ -9,7 +10,6 @@ use crate::{
         general::UNIT_PART_WEIGHTS,
         unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
     },
-    id::UUID,
     intents::{self, Intent, Intents},
     objects::{HasHealth, HasId},
     player::OwnerId,
@@ -20,7 +20,7 @@ pub type Units = HashMap<Hex, Unit>;
 
 #[derive(Default, Serialize)]
 pub struct Unit {
-    pub id: UUID,
+    pub id: Uuid,
     pub owner_id: OwnerId,
     pub health: u32,
     pub hex: Hex,
@@ -36,7 +36,7 @@ impl HasHealth for Unit {
 }
 
 impl HasId for Unit {
-    fn id(&self) -> UUID {
+    fn id(&self) -> Uuid {
         self.id
     }
 }

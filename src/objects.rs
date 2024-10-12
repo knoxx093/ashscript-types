@@ -1,4 +1,6 @@
-use crate::id::UUID;
+use uuid::Uuid;
+
+
 
 pub trait HasHealth {
     fn health(&self) -> u32;
@@ -11,5 +13,5 @@ pub enum Attackable {
 }
 
 pub trait HasId {
-    fn id(&self) -> UUID;
+    fn id(&self) -> Uuid;
 }
