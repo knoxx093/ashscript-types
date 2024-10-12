@@ -16,7 +16,7 @@ use crate::{
 
 pub type Units = HashMap<Hex, Unit>;
 
-#[derive(Default, Serialize)]
+#[derive(Default, Serialize, Clone)]
 pub struct Unit {
     pub id: Uuid,
     pub owner_id: OwnerId,

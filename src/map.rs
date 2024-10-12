@@ -3,7 +3,7 @@ use serde::Serialize;
 
 use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, unit::Unit};
 
-#[derive(Default, Serialize)]
+#[derive(Default, Serialize, Clone)]
 pub struct Map {
     pub chunks: Chunks,
 }

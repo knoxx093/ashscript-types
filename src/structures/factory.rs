@@ -7,7 +7,7 @@ use crate::{objects::{HasHealth, HasId}, player::OwnerId};
 
 pub type Factories = HashMap<Hex, Factory>;
 
-#[derive(Serialize, Default)]
+#[derive(Serialize, Default, Clone)]
 pub struct Factory {
     pub id: Uuid,
     pub owner_id: OwnerId,

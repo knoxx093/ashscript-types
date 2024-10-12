@@ -7,7 +7,7 @@ use crate::{objects::{HasHealth, HasId}, player::OwnerId};
 
 pub type Turrets = HashMap<Hex, Turret>;
 
-#[derive(Serialize, Default)]
+#[derive(Serialize, Default, Clone)]
 pub struct Turret {
     pub id: Uuid,
     pub owner_id: OwnerId,

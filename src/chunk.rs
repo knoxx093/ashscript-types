@@ -7,7 +7,7 @@ use crate::{structures::{factory::Factories, turret::Turrets}, unit::Units};
 
 pub type Chunks = HashMap<Hex, Chunk>;
 
-#[derive(Default, Serialize)]
+#[derive(Default, Serialize, Clone)]
 pub struct Chunk {
     pub chunk_hex: Hex,
     pub units: Units,
