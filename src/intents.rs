@@ -15,6 +15,7 @@ pub enum Intent {
     ResourceTransfer(ResourceTransfer),
 }
 
+#[derive(enum_map::Enum)]
 pub enum IntentName {
     UnitMove,
     UnitAttack,
