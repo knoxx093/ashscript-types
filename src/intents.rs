@@ -15,7 +15,7 @@ pub enum Intent {
     ResourceTransfer(ResourceTransfer),
 }
 
-#[derive(enum_map::Enum)]
+#[derive(enum_map::Enum, Hash, Eq, PartialEq, Clone, Copy, Debug)]
 pub enum IntentName {
     UnitMove,
     UnitAttack,
