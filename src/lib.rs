@@ -12,5 +12,3 @@ pub mod global;
 pub mod objects;
 
 pub type IdType = String;
-
-fn main() {}
