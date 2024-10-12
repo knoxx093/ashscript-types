@@ -1,5 +1,4 @@
-use glam::Vec2;
-use hexx::{Hex, HexLayout, HexOrientation};
+use hexx::Hex;
 use serde::Serialize;
 
 use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, unit::Unit};

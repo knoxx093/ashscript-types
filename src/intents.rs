@@ -1,7 +1,7 @@
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::{resource::Resource, structures::turret::Turret, unit::{Unit, UnitBody}, IdType};
+use crate::{resource::Resource, unit::UnitBody};
 
 // REMINDER: These are player-generated intents
 

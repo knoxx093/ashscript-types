@@ -1,6 +1,3 @@
-use enum_map::{enum_map, EnumMap};
-use hashbrown::HashSet;
-
 #[derive(enum_map::Enum, Hash, Eq, PartialEq, Clone, Copy, Debug)]
 pub enum Resource {
     Coal,

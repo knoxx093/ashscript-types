@@ -1,11 +1,10 @@
-use enum_map::{enum_map, EnumMap};
+use enum_map::EnumMap;
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 use uuid::Uuid;
 
 use crate::{
-    chunk::Chunk,
     constants::{
         general::UNIT_PART_WEIGHTS,
         unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
@@ -13,7 +12,6 @@ use crate::{
     intents::{self, Intent, Intents},
     objects::{HasHealth, HasId},
     player::OwnerId,
-    IdType,
 };
 
 pub type Units = HashMap<Hex, Unit>;

@@ -1,10 +1,9 @@
-use std::default;
 
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{structures::{factory::Factories, turret::Turrets}, unit::{Unit, Units}};
+use crate::{structures::{factory::Factories, turret::Turrets}, unit::Units};
 
 pub type Chunks = HashMap<Hex, Chunk>;
 

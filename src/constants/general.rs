@@ -1,7 +1,5 @@
 use enum_map::{enum_map, EnumMap};
-use glam::Vec2;
 use hashbrown::HashSet;
-use hexx::{HexLayout, HexOrientation};
 use lazy_static::lazy_static;
 
 use crate::{resource::Resource, unit::UnitPart};

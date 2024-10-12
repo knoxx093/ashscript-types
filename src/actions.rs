@@ -1,7 +1,7 @@
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::{resource::Resource, structures::turret::Turret, unit::Unit};
+use crate::resource::Resource;
 
 // REMINDER: These are intents that the server validates and wants executed
 
