@@ -21,6 +21,8 @@ pub struct Factory {
     pub future_health: u32,
     #[serde(skip)]
     pub future_energy: u32,
+    #[serde(skip)]
+    pub future_hex: Hex,
 }
 
 impl HasHealth for Factory {
