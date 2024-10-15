@@ -42,6 +42,7 @@ pub struct UnitAttack {
 pub struct TurretAttack {
     pub turret_hex: Hex,
     pub target_hex: Hex,
+    pub target_kind: Attackable,
 }
 
 /// The spawning of a unit from a factory
