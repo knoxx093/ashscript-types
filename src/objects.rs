@@ -14,7 +14,7 @@ pub trait HasHealth {
 }
 
 #[enum_dispatch(HasHealth)]
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub enum Attackable {
     Unit,
     Turret,
@@ -29,7 +29,7 @@ pub trait HasStorage {
     fn storage(&self) -> &Storage;
 }
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub enum WithStorage {
     Unit,
     Turret,
