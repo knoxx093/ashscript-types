@@ -46,3 +46,6 @@ pub struct ResourceTransfer {
     pub to_id: Uuid,
 }
 
+pub struct ObjectDestroyed {
+    pub id: Uuid,
+}
