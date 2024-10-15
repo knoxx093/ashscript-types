@@ -1,7 +1,7 @@
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::resource::Resource;
+use crate::{objects::Attackable, resource::Resource};
 
 // REMINDER: These are intents that the server validates and wants executed
 
@@ -58,8 +58,9 @@ pub struct UnitAttack {
 }
 
 pub struct TurretAttack {
-    pub turret_id: Uuid,
-    pub target_id: Uuid,
+    pub turret_hex: Hex,
+    pub target_hex: Hex,
+    pub target_kind: Attackable,
     pub damage: u32,
     pub cost: u32,
 }
