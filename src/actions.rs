@@ -24,9 +24,9 @@ impl ActionsByKind {
 }
 
 pub struct UnitMove {
-    pub unit_id: Uuid,
     pub from: Hex,
     pub to: Hex,
+    pub cost: u32,
 }
 pub struct UnitAttack {
     pub attacker_hex: Hex,
