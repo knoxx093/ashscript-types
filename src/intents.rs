@@ -1,7 +1,7 @@
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::{resource::Resource, unit::UnitBody};
+use crate::{objects::{Attackable}, resource::Resource, unit::UnitBody};
 
 // REMINDER: These are player-generated intents
 
@@ -11,7 +11,8 @@ pub enum Intent {
     UnitMove(UnitMove),
     UnitAttack(UnitAttack),
     TurretAttack(TurretAttack),
-    FactorySpawn(FactorySpawn),
+    FactorySpawn(FactorySpawnUnit),
+    UnitSpawnUnit(UnitSpawnUnit),
     ResourceTransfer(ResourceTransfer),
 }
 
@@ -24,24 +25,28 @@ pub enum IntentName {
     ResourceTransfer,
 }
 
+
+/// A unit moving from one hex to another
 pub struct UnitMove {
-    pub unit_id: Uuid,
     pub from: Hex,
     pub to: Hex,
 }
 
+/// A unit attacking an attackable target
 pub struct UnitAttack {
-    pub unit_id: Uuid,
-    pub target_id: Uuid,
+    pub attacker_hex: Hex,
+    pub target_hex: Hex,
 }
 
+/// A turret attacking an attackable target
 pub struct TurretAttack {
-    pub turret_id: Uuid,
-    pub target_id: Uuid,
+    pub turret_hex: Hex,
+    pub target_hex: Hex,
 }
 
-pub struct FactorySpawn {
-    pub factory_id: Uuid,
+/// The spawning of a unit from a factory
+pub struct FactorySpawnUnit {
+    pub factory_hex: Hex,
     pub body: UnitBody,
     pub name: String,
     /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
@@ -49,9 +54,20 @@ pub struct FactorySpawn {
     pub out: Option<Vec<Hex>>,
 }
 
+/// The spawning of a unit from a unit
+pub struct UnitSpawnUnit {
+    pub unit_hex: Hex,
+    pub body: UnitBody,
+    pub name: String,
+    /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
+    /// If out hexes are provided, sucessfully spawned units will be outputed to the first empty hex 
+    pub out: Option<Vec<Hex>>,
+}
+
+/// A resource transfer from one storable object to another
 pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
-    pub from_id: Uuid,
-    pub to_id: Uuid,
+    pub from_hex: Hex,
+    pub to_hex: Hex,
 }
