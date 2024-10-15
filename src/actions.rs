@@ -5,17 +5,6 @@ use crate::{objects::Attackable, resource::Resource};
 
 // REMINDER: These are intents that the server validates and wants executed
 
-pub type Actions = Vec<Action>;
-
-pub enum Action {
-    UnitMove(UnitMove),
-    UnitAttack(UnitAttack),
-    TurretAttack(TurretAttack),
-    FactorySpawnUnit(FactorySpawnUnit),
-    UnitSpawnUnit(UnitSpawnUnit),
-    ResourceTransfer(ResourceTransfer),
-}
-
 #[derive(Default)]
 pub struct ActionsByKind {
     pub unit_move: Vec<UnitMove>,
@@ -30,18 +19,6 @@ impl ActionsByKind {
     pub fn new() -> Self {
         Self {
             ..Default::default()
-        }
-    }
-
-    /// Add an action of a non-specified kind
-    fn add_action(&mut self, intent: Action) {
-        match intent {
-            Action::UnitMove(unit_move) => self.unit_move.push(unit_move),
-            Action::UnitAttack(unit_attack) => self.unit_attack.push(unit_attack),
-            Action::TurretAttack(turret_attack) => self.turret_attack.push(turret_attack),
-            Action::FactorySpawnUnit(factory_spawn) => self.factory_spawn_unit.push(factory_spawn),
-            Action::UnitSpawnUnit(unit_spawn_unit) => self.unit_spawn_unit.push(unit_spawn_unit),
-            Action::ResourceTransfer(resource_transfer) => self.resource_transfer.push(resource_transfer),
         }
     }
 }

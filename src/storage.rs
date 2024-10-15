@@ -1,7 +1,7 @@
 use hashbrown::{HashMap, HashSet};
 use serde::Serialize;
 
-use crate::{resource::Resource};
+use crate::resource::Resource;
 
 #[derive(Default, Serialize, Clone)]
 pub struct Storage {

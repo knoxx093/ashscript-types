@@ -1,5 +1,4 @@
 use hexx::Hex;
-use uuid::Uuid;
 
 use crate::{objects::{Attackable}, resource::Resource, unit::UnitBody};
 
