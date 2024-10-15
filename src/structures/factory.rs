@@ -17,6 +17,10 @@ pub struct Factory {
     pub progress: u32,
     pub health: u32,
     pub storage: Storage,
+    #[serde(skip)]
+    pub future_health: u32,
+    #[serde(skip)]
+    pub future_energy: u32,
 }
 
 impl HasHealth for Factory {

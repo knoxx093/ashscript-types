@@ -27,6 +27,10 @@ pub struct Unit {
     pub age: u32,
     pub body: UnitBody,
     pub storage: Storage,
+    #[serde(skip)]
+    pub future_health: u32,
+    #[serde(skip)]
+    pub future_energy: u32,
 }
 
 impl HasHealth for Unit {
