@@ -13,7 +13,6 @@ pub trait HasHealth {
     fn health(&self) -> u32;
 }
 
-#[enum_dispatch(HasHealth)]
 #[derive(Clone, Copy)]
 pub enum Attackable {
     Unit,
