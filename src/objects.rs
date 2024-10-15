@@ -14,6 +14,7 @@ pub trait HasHealth {
 }
 
 #[enum_dispatch(HasHealth)]
+#[derive(Clone)]
 pub enum Attackable {
     Unit,
     Turret,
