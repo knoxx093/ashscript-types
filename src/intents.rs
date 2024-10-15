@@ -11,7 +11,7 @@ pub enum Intent {
     UnitMove(UnitMove),
     UnitAttack(UnitAttack),
     TurretAttack(TurretAttack),
-    FactorySpawn(FactorySpawnUnit),
+    FactorySpawnUnit(FactorySpawnUnit),
     UnitSpawnUnit(UnitSpawnUnit),
     ResourceTransfer(ResourceTransfer),
 }
@@ -21,7 +21,7 @@ pub enum IntentName {
     UnitMove,
     UnitAttack,
     TurretAttack,
-    FactorySpawn,
+    FactorySpawnUnit,
     ResourceTransfer,
 }
 
