@@ -6,12 +6,9 @@ use uuid::Uuid;
 
 use crate::{
     constants::{
-        general::UNIT_PART_WEIGHTS,
+        general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
         unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
-    },
-    intents::{self, Intent, Intents},
-    objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
-    player::OwnerId, storage::Storage,
+    }, intents::{self, Intent, Intents}, objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::OwnerId, resource::Resource, storage::Storage
 };
 
 pub type Units = HashMap<Hex, Unit>;
@@ -69,7 +66,7 @@ impl Unit {
     }
 
     pub fn max_age(&self) -> u32 {
-        ((self.body[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32
+        ((self.body.0[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32
             + UNIT_BASE_AGE
     }
 
@@ -84,15 +81,15 @@ impl Unit {
     }
 
     pub fn range(&self) -> u32 {
-        self.body[UnitPart::Ranged]
+        self.body.0[UnitPart::Ranged]
     }
 
     pub fn damage(&self) -> u32 {
-        self.body[UnitPart::Ranged]
+        self.body.0[UnitPart::Ranged]
     }
 
     pub fn attack_cost(&self) -> u32 {
-        self.body[UnitPart::Ranged]
+        self.body.0[UnitPart::Ranged]
     }
 
     /* pub fn attack<T>(&self, target: T, intents: &mut Intents)
@@ -115,7 +112,31 @@ impl Unit {
     } */
 }
 
-pub type UnitBody = EnumMap<UnitPart, u32>;
+#[derive(Default, Clone, Serialize)]
+pub struct UnitBody(EnumMap<UnitPart, u32>);
+
+impl UnitBody {
+    pub fn cost(&self) -> HashMap<Resource, u32> {
+        let mut cost = HashMap::new();
+
+        for (part_type, count) in self.0.iter() {
+            let (resource, cost_per_part) = UNIT_PART_COSTS[part_type];
+            cost.insert(resource, cost_per_part * count);
+        }
+
+        cost
+    }
+
+    pub fn weight(&self) -> u32 {
+        let mut weight = 0;
+
+        for (part_type, count) in self.0.iter() {
+            weight += UNIT_PART_WEIGHTS[part_type] * count;
+        }
+
+        weight
+    }
+}
 
 #[derive(enum_map::Enum, Serialize)]
 pub enum UnitPart {
@@ -124,4 +145,13 @@ pub enum UnitPart {
     Generate,
     Work,
     Battery,
+    Shield,
+    Fabricate,
+    RangeImprovement,
+    DamageImprovement,
+    GenerateImprovement,
+    BatteryImprovement,
+    ShieldImprovement,
+    FabricateImprovement,
+    WeightImprovement,
 }

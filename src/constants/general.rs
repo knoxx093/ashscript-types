@@ -19,4 +19,11 @@ lazy_static! {
         UnitPart::Harvest => 2,
         _ => 1,
     };
+    pub static ref UNIT_PART_COSTS: EnumMap<UnitPart, (Resource, u32)> = enum_map! {
+        UnitPart::Ranged => (Resource::Metal, 8),
+        UnitPart::Generate => (Resource::Metal, 4),
+        UnitPart::Battery => (Resource::Metal, 2),
+        UnitPart::Harvest => (Resource::Metal, 3),
+        _ => (Resource::Metal, 1),
+    };
 }
