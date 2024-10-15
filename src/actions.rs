@@ -29,8 +29,10 @@ pub struct UnitMove {
     pub to: Hex,
 }
 pub struct UnitAttack {
-    pub unit_id: Uuid,
-    pub target_id: Uuid,
+    pub attacker_hex: Hex,
+    pub target_hex: Hex,
+    pub target_kind: Attackable,
+    pub cost: u32,
     pub damage: u32,
 }
 

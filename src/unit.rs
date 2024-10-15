@@ -95,7 +95,7 @@ impl Unit {
         self.body[UnitPart::Ranged]
     }
 
-    pub fn attack<T>(&self, target: T, intents: &mut Intents)
+    /* pub fn attack<T>(&self, target: T, intents: &mut Intents)
     where
         T: HasHealth + HasHex,
     {
@@ -112,7 +112,7 @@ impl Unit {
         // Checks see if the itnent is likely to be converted into an action
 
         self.attack(target, intents);
-    }
+    } */
 }
 
 pub type UnitBody = EnumMap<UnitPart, u32>;

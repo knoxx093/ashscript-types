@@ -35,6 +35,7 @@ pub struct UnitMove {
 pub struct UnitAttack {
     pub attacker_hex: Hex,
     pub target_hex: Hex,
+    pub target_kind: Attackable,
 }
 
 /// A turret attacking an attackable target
