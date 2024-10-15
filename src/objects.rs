@@ -29,6 +29,13 @@ pub trait HasStorage {
     fn storage(&self) -> &Storage;
 }
 
+#[derive(Clone)]
+pub enum WithStorage {
+    Unit,
+    Turret,
+    Factory,
+}
+
 /* pub enum GameObject<'a> {
     Unit(&'a Unit),
     Turret(&'a Turret),
