@@ -10,8 +10,8 @@ use crate::{
         unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
     },
     intents::{self, Intent, Intents},
-    objects::{HasHealth, HasId},
-    player::OwnerId,
+    objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
+    player::OwnerId, storage::Storage,
 };
 
 pub type Units = HashMap<Hex, Unit>;
@@ -19,12 +19,14 @@ pub type Units = HashMap<Hex, Unit>;
 #[derive(Default, Serialize, Clone)]
 pub struct Unit {
     pub id: Uuid,
+    pub kind: GameObjectKind,
     pub owner_id: OwnerId,
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,
     pub age: u32,
     pub body: UnitBody,
+    pub storage: Storage,
 }
 
 impl HasHealth for Unit {
@@ -36,6 +38,18 @@ impl HasHealth for Unit {
 impl HasId for Unit {
     fn id(&self) -> Uuid {
         self.id
+    }
+}
+
+impl HasHex for Unit {
+    fn hex(&self) -> Hex {
+        self.hex
+    }
+}
+
+impl HasStorage for Unit {
+    fn storage(&self) -> &Storage {
+        &self.storage
     }
 }
 
@@ -77,17 +91,17 @@ impl Unit {
 
     pub fn attack<T>(&self, target: T, intents: &mut Intents)
     where
-        T: HasHealth + HasId,
+        T: HasHealth + HasHex,
     {
         intents.push(Intent::UnitAttack(intents::UnitAttack {
-            unit_id: self.id,
-            target_id: target.id(),
+            attacker_hex: self.hex,
+            target_hex: target.hex(),
         }));
     }
 
     pub fn attack_checked<T>(&self, target: T, intents: &mut Intents)
     where
-        T: HasHealth + HasId,
+        T: HasHealth + HasHex,
     {
         // Checks see if the itnent is likely to be converted into an action
 

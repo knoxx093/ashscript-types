@@ -3,17 +3,19 @@ use hexx::Hex;
 use serde::Serialize;
 use uuid::Uuid;
 
-use crate::{objects::{HasHealth, HasId}, player::OwnerId};
+use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::OwnerId, storage::Storage};
 
 pub type Turrets = HashMap<Hex, Turret>;
 
 #[derive(Serialize, Default, Clone)]
 pub struct Turret {
     pub id: Uuid,
+    pub kind: GameObjectKind,
     pub owner_id: OwnerId,
     pub energy: u32,
     pub hex: Hex,
     pub health: u32,
+    pub storage: Storage,
 }
 
 impl HasHealth for Turret {
@@ -25,6 +27,18 @@ impl HasHealth for Turret {
 impl HasId for Turret {
     fn id(&self) -> Uuid {
         self.id
+    }
+}
+
+impl HasHex for Turret {
+    fn hex(&self) -> Hex {
+        self.hex
+    }
+}
+
+impl HasStorage for Turret {
+    fn storage(&self) -> &Storage {
+        &self.storage
     }
 }
 
