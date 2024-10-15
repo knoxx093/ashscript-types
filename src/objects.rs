@@ -49,7 +49,7 @@ pub enum GameObjectMut<'a> {
 
 /// Each type has its own storage inside of a chunk, and cannot share a hex/tile with another of its own type (ex: two units cannot be on the same tile)
 /// Not exactly sure if this is useful anywhere
-#[derive(Serialize, Clone, Copy, Default)]
+#[derive(Serialize, Clone, Copy, Default, Eq, PartialEq, Hash)]
 pub enum GameObjectKind {
     Unit,
     Turret,
