@@ -1,7 +1,7 @@
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, objects::{GameObject, GameObjectKind, GameObjectMut, HasHealth, Identifier}, structures::{factory::Factory, turret::Turret}, unit::Unit};
+use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{factory::Factory, turret::Turret}, unit::Unit};
 
 #[derive(Default, Serialize, Clone)]
 pub struct Map {
@@ -55,7 +55,7 @@ impl Map {
         chunk.turrets.get_mut(hex)
     }
 
-    pub fn game_object(&self, identifier: &Identifier) -> Option<GameObject> {
+    /* pub fn game_object(&self, identifier: &Identifier) -> Option<GameObject> {
 
         match identifier.kind {
             GameObjectKind::Unit => {
@@ -90,5 +90,5 @@ impl Map {
             }
             _ => None,
         }
-    }
+    } */
 }
