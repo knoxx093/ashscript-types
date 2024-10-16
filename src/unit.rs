@@ -117,7 +117,7 @@ impl Unit {
     } */
 }
 
-#[derive(Default, Clone, Serialize)]
+#[derive(Default, Clone, Copy, Serialize)]
 pub struct UnitBody(EnumMap<UnitPart, u32>);
 
 impl UnitBody {
@@ -143,7 +143,7 @@ impl UnitBody {
     }
 }
 
-#[derive(enum_map::Enum, Serialize)]
+#[derive(enum_map::Enum, Serialize, Clone, Copy)]
 pub enum UnitPart {
     Ranged,
     Harvest,
