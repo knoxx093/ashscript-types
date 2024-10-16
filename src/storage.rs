@@ -22,7 +22,7 @@ impl Storage {
         }
     }
 
-    pub fn has_sufficient(&self, cost: HashMap<Resource, u32>) -> bool {
+    pub fn has_sufficient(&self, cost: &HashMap<Resource, u32>) -> bool {
         for (resource, amount) in cost.iter() {
             let Some(has) = self.resources.get(resource) else {
                 return false;
