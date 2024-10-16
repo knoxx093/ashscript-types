@@ -1,3 +1,4 @@
+use hashbrown::HashMap;
 use hexx::Hex;
 use uuid::Uuid;
 
@@ -49,7 +50,7 @@ pub struct FactorySpawnUnit {
     pub out: Hex,
     pub body: UnitBody,
     pub name: String,
-    pub cost: u32,
+    pub cost: HashMap<Resource, u32>,
 }
 
 pub struct UnitSpawnUnit {
@@ -57,7 +58,7 @@ pub struct UnitSpawnUnit {
     pub out: Hex,
     pub body: UnitBody,
     pub name: String,
-    pub cost: u32,
+    pub cost: HashMap<Resource, u32>,
 }
 
 pub struct ResourceTransfer {
