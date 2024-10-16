@@ -63,7 +63,7 @@ impl Storage {
     }
 
     /// Returns an error if the result goes below zero
-    pub fn subtract_many_checked(&mut self, cost: HashMap<Resource, u32>) -> Result<(), Resource> {
+    pub fn subtract_many_checked(&mut self, cost: &HashMap<Resource, u32>) -> Result<(), Resource> {
         for (resource, amount) in cost.iter() {
             self.subtract_checked(resource, amount)?;
         }
@@ -72,7 +72,7 @@ impl Storage {
     }
 
     /// Returns an error if the result exceeds the capacity of the structure
-    pub fn add_many_checked(&mut self, cost: HashMap<Resource, u32>) -> Result<(), Resource> {
+    pub fn add_many_checked(&mut self, cost: &HashMap<Resource, u32>) -> Result<(), Resource> {
         for (resource, amount) in cost.iter() {
             self.add_checked(resource, amount)?;
         }
