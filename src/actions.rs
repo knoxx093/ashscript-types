@@ -1,7 +1,7 @@
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::{objects::Attackable, resource::Resource};
+use crate::{objects::{Attackable, GameObjectKind, HasStorage, WithStorage}, resource::Resource, unit::UnitBody};
 
 // REMINDER: These are intents that the server validates and wants executed
 
@@ -45,24 +45,31 @@ pub struct TurretAttack {
 }
 
 pub struct FactorySpawnUnit {
-    pub factory_id: Uuid,
-    pub unit_id: u32,
+    pub factory_hex: Hex,
     pub out: Hex,
+    pub body: UnitBody,
+    pub name: String,
+    pub cost: u32,
 }
 
 pub struct UnitSpawnUnit {
-    pub parent_id: Uuid,
-    pub child_id: Uuid,
+    pub parent_hex: Hex,
     pub out: Hex,
+    pub body: UnitBody,
+    pub name: String,
+    pub cost: u32,
 }
 
 pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
-    pub from_id: Uuid,
-    pub to_id: Uuid,
+    pub from: Hex,
+    pub from_kind: WithStorage,
+    pub to_hex: Hex,
+    pub to_kind: WithStorage,
 }
 
 pub struct ObjectDestroyed {
-    pub id: Uuid,
+    pub hex: Hex,
+    pub kind: GameObjectKind,
 }

@@ -8,7 +8,12 @@ use crate::{
     constants::{
         general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
         unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
-    }, intents::{self, Intent, Intents}, objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::OwnerId, resource::Resource, storage::Storage
+    },
+    intents::{self, Intent, Intents},
+    objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
+    player::OwnerId,
+    resource::Resource,
+    storage::Storage,
 };
 
 pub type Units = HashMap<Hex, Unit>;
