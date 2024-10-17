@@ -6,7 +6,7 @@ use crate::{objects::{Attackable, GameObjectKind, HasStorage, WithStorage}, reso
 
 // REMINDER: These are intents that the server validates and wants executed
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct ActionsByKind {
     pub unit_move: Vec<UnitMove>,
     pub unit_attack: Vec<UnitAttack>,
@@ -24,11 +24,14 @@ impl ActionsByKind {
     }
 }
 
+#[derive(Debug)]
 pub struct UnitMove {
     pub from: Hex,
     pub to: Hex,
     pub cost: u32,
 }
+
+#[derive(Debug)]
 pub struct UnitAttack {
     pub attacker_hex: Hex,
     pub target_hex: Hex,
@@ -37,6 +40,7 @@ pub struct UnitAttack {
     pub damage: u32,
 }
 
+#[derive(Debug)]
 pub struct TurretAttack {
     pub turret_hex: Hex,
     pub target_hex: Hex,
@@ -45,6 +49,7 @@ pub struct TurretAttack {
     pub cost: u32,
 }
 
+#[derive(Debug)]
 pub struct FactorySpawnUnit {
     pub factory_hex: Hex,
     pub out: Hex,
@@ -53,6 +58,7 @@ pub struct FactorySpawnUnit {
     pub cost: HashMap<Resource, u32>,
 }
 
+#[derive(Debug)]
 pub struct UnitSpawnUnit {
     pub parent_hex: Hex,
     pub out: Hex,
@@ -61,6 +67,7 @@ pub struct UnitSpawnUnit {
     pub cost: HashMap<Resource, u32>,
 }
 
+#[derive(Debug)]
 pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
@@ -70,6 +77,7 @@ pub struct ResourceTransfer {
     pub to_kind: WithStorage,
 }
 
+#[derive(Debug)]
 pub struct ObjectDestroyed {
     pub hex: Hex,
     pub kind: GameObjectKind,

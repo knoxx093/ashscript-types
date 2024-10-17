@@ -13,7 +13,7 @@ pub trait HasHealth {
     fn health(&self) -> u32;
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum Attackable {
     Unit,
     Turret,
@@ -28,7 +28,7 @@ pub trait HasStorage {
     fn storage(&self) -> &Storage;
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum WithStorage {
     Unit,
     Turret,
@@ -49,7 +49,7 @@ pub enum GameObjectMut<'a> {
 
 /// Each type has its own storage inside of a chunk, and cannot share a hex/tile with another of its own type (ex: two units cannot be on the same tile)
 /// Not exactly sure if this is useful anywhere
-#[derive(Serialize, Clone, Copy, Default, Eq, PartialEq, Hash)]
+#[derive(Serialize, Clone, Copy, Default, Eq, PartialEq, Hash, Debug)]
 pub enum GameObjectKind {
     Unit,
     Turret,
