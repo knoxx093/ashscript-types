@@ -1,6 +1,6 @@
 use hexx::Hex;
 
-use crate::{objects::{Attackable}, resource::Resource, unit::UnitBody};
+use crate::{objects::{Attackable, WithStorage}, resource::Resource, unit::UnitBody};
 
 // REMINDER: These are player-generated intents
 
@@ -71,4 +71,6 @@ pub struct ResourceTransfer {
     pub amount: u32,
     pub from_hex: Hex,
     pub to_hex: Hex,
+    pub from_kind: WithStorage,
+    pub to_kind: WithStorage,
 }
