@@ -55,7 +55,7 @@ impl Storage {
             return Err(*resource);
         }
 
-        self.resources.insert(*resource, has + amount);
+        self.resources.insert(*resource, has - amount);
         Ok(())
     }
 
