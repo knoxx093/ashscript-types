@@ -11,15 +11,15 @@ pub enum Terrain {
 
 #[derive(Default, Serialize, Clone, Debug)]
 pub struct MineralNode {
-    amount: u32,
+    pub amount: u32,
 }
 
 #[derive(Default, Serialize, Clone, Debug)]
 pub struct CoalNode {
-    amount: u32,
+    pub amount: u32,
 }
 
 #[derive(Default, Serialize, Clone, Debug)]
 pub struct Scrap {
-    amount: u32,
+    pub amount: u32,
 }
