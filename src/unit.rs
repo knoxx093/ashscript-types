@@ -137,7 +137,8 @@ impl UnitBody {
 
         for (part_type, count) in self.parts.iter() {
             let (resource, cost_per_part) = UNIT_PART_COSTS[part_type];
-            cost.insert(resource, cost_per_part * count);
+
+            *cost.entry(resource).or_insert(0) += cost_per_part * count;
         }
 
         cost
