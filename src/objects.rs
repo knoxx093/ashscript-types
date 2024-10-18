@@ -36,6 +36,13 @@ pub enum WithStorage {
     Factory,
 }
 
+#[derive(Clone, Copy, Debug, Sequence)]
+pub enum WithEnergy {
+    Unit,
+    Turret,
+    Factory,
+}
+
 /* pub enum GameObject<'a> {
     Unit(&'a Unit),
     Turret(&'a Turret),
@@ -50,7 +57,7 @@ pub enum GameObjectMut<'a> {
 
 /// Each type has its own storage inside of a chunk, and cannot share a hex/tile with another of its own type (ex: two units cannot be on the same tile)
 /// Not exactly sure if this is useful anywhere
-#[derive(Serialize, Clone, Copy, Default, Eq, PartialEq, Hash, Debug)]
+#[derive(Serialize, Clone, Copy, Default, Eq, PartialEq, Hash, Debug, Sequence)]
 pub enum GameObjectKind {
     Unit,
     Turret,
