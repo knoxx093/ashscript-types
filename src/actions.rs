@@ -78,6 +78,7 @@ pub struct ResourceTransfer {
 }
 
 #[derive(Debug)]
+// Doesn't need to be used when the object is knowably destroyed due to other actions (such as being attacked such that health is at or below 0)
 pub struct ObjectDestroyed {
     pub hex: Hex,
     pub kind: GameObjectKind,

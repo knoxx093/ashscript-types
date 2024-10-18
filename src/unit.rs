@@ -7,7 +7,7 @@ use uuid::Uuid;
 use crate::{
     constants::{
         general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
-        unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH},
+        unit::{AGE_PER_GEN_PART, BATTERY_ENERGY_CAPACITY, GENERATOR_ENERGY_CAPACITY, GENERATOR_ENERGY_INCOME, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH},
     },
     intents::{self, Intent, Intents},
     objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
@@ -171,6 +171,15 @@ impl UnitBody {
 
     pub fn max_shield_health(&self) -> u32 {
         self.parts[UnitPart::Shield] * UNIT_SHIELD_HEALTH
+    }
+
+    pub fn energy_income(&self) -> u32 {
+        self.parts[UnitPart::Generate] * GENERATOR_ENERGY_INCOME
+    }
+
+    pub fn energy_capacity(&self) -> u32 {
+        self.parts[UnitPart::Generate] * GENERATOR_ENERGY_CAPACITY
+            + self.parts[UnitPart::Battery] * BATTERY_ENERGY_CAPACITY
     }
 }
 
