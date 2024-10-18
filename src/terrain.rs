@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-#[derive(Default, Serialize, Clone, Debug)]
+#[derive(Default, Serialize, Clone, Debug, Eq, PartialEq)]
 /// Tiles with consistent properties
 pub enum Terrain {
     #[default]
