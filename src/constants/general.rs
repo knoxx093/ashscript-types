@@ -27,3 +27,9 @@ lazy_static! {
         _ => (Resource::Metal, 1),
     };
 }
+
+pub enum IntentReturnCode {
+    InsufficientResources,
+    WrongArgument,
+    OutOfRange,
+}
