@@ -1,7 +1,7 @@
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{factory::Factory, turret::Turret}, unit::Unit};
+use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{factory::Factory, turret::Turret}, terrain::Terrain, unit::Unit};
 
 #[derive(Default, Serialize, Clone)]
 pub struct Map {
@@ -24,6 +24,11 @@ impl Map {
     pub fn chunk_at_mut(&mut self, hex: &Hex) -> Option<&mut Chunk> {
         let chunk_hex = hex.to_lower_res(CHUNK_SIZE);
         self.chunks.get_mut(&chunk_hex)
+    }
+
+    pub fn terrain_at(&self, hex: &Hex) -> Option<&Terrain> {
+        let chunk = self.chunk_at(hex)?;
+        chunk.terrain.get(hex)
     }
 
     pub fn unit_at(&self, hex: &Hex) -> Option<&Unit> {
