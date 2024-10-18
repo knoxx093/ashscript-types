@@ -1,4 +1,4 @@
-use enum_map::EnumMap;
+use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
@@ -7,7 +7,7 @@ use uuid::Uuid;
 use crate::{
     constants::{
         general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
-        unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE},
+        unit::{AGE_PER_GEN_PART, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH},
     },
     intents::{self, Intent, Intents},
     objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
@@ -63,39 +63,31 @@ impl HasStorage for Unit {
 }
 
 impl Unit {
-    pub fn new(hex: Hex) -> Self {
+    pub fn new(hex: Hex, name: String, body: UnitBody) -> Self {
         Self {
-            health: 100,
+            health: body.health_with_shields(),
+            body,
+            name,
             hex,
             ..Default::default()
         }
     }
 
     pub fn max_age(&self) -> u32 {
-        ((self.body.0[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32
+        ((self.body.parts[UnitPart::Generate] * AGE_PER_GEN_PART) as f32).powf(UNIT_AGE_EXP) as u32
             + UNIT_BASE_AGE
     }
 
-    pub fn weight(&self) -> u32 {
-        let mut weight = 0;
-
-        for (part, _) in UNIT_PART_WEIGHTS.iter() {
-            weight += UNIT_PART_WEIGHTS[part]
-        }
-
-        weight
-    }
-
     pub fn range(&self) -> u32 {
-        self.body.0[UnitPart::Ranged]
+        self.body.parts[UnitPart::Ranged]
     }
 
     pub fn damage(&self) -> u32 {
-        self.body.0[UnitPart::Ranged]
+        self.body.parts[UnitPart::Ranged]
     }
 
     pub fn attack_cost(&self) -> u32 {
-        self.body.0[UnitPart::Ranged]
+        self.body.parts[UnitPart::Ranged]
     }
 
     /* pub fn attack<T>(&self, target: T, intents: &mut Intents)
@@ -119,13 +111,31 @@ impl Unit {
 }
 
 #[derive(Default, Clone, Copy, Serialize, Debug)]
-pub struct UnitBody(pub EnumMap<UnitPart, u32>);
+pub struct UnitBody {
+    pub parts: EnumMap<UnitPart, u32>,
+    pub shield_health: u32,
+}
 
 impl UnitBody {
+    pub fn from_vec(parts: Vec<(UnitPart, u32)>) -> Self {
+        let mut parts_map = enum_map! {
+            _ => 0,
+        };
+
+        for (part, count) in parts {
+            parts_map[part] += count;
+        }
+
+        Self {
+            parts: parts_map,
+            shield_health: parts_map[UnitPart::Shield] * UNIT_SHIELD_HEALTH,
+        }
+    }
+
     pub fn cost(&self) -> HashMap<Resource, u32> {
         let mut cost = HashMap::new();
 
-        for (part_type, count) in self.0.iter() {
+        for (part_type, count) in self.parts.iter() {
             let (resource, cost_per_part) = UNIT_PART_COSTS[part_type];
             cost.insert(resource, cost_per_part * count);
         }
@@ -136,11 +146,29 @@ impl UnitBody {
     pub fn weight(&self) -> u32 {
         let mut weight = 0;
 
-        for (part_type, count) in self.0.iter() {
-            weight += UNIT_PART_WEIGHTS[part_type] * count;
+        for (part, count) in self.parts.iter() {
+            weight += UNIT_PART_WEIGHTS[part] * count;
         }
 
         weight
+    }
+
+    pub fn health_with_shields(&self) -> u32 {
+        self.health_without_shields() + self.shield_health
+    }
+
+    pub fn health_without_shields(&self) -> u32 {
+        let mut health = 0;
+
+        for (part, count) in self.parts.iter() {
+            health += count * UNIT_HEALTH_PER_PART
+        }
+
+        health
+    }
+
+    pub fn max_shield_health(&self) -> u32 {
+        self.parts[UnitPart::Shield] * UNIT_SHIELD_HEALTH
     }
 }
 
