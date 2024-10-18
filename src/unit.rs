@@ -23,6 +23,7 @@ pub struct Unit {
     pub id: Uuid,
     pub kind: GameObjectKind,
     pub owner_id: PlayerId,
+    pub name: String,
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,
