@@ -6,6 +6,7 @@ pub type PlayerId = Uuid;
 
 #[derive(Default, Serialize, Debug, Clone)]
 pub struct Player {
+    pub id: Uuid,
     pub name: String,
     pub public_memory: HashMap<String, String>,
 }
