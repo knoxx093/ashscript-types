@@ -7,4 +7,5 @@ pub enum Resource {
     Scrap,
     Energy,
     Metal,
+    Uranium,
 }
