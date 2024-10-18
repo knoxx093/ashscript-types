@@ -16,7 +16,7 @@ pub struct Chunk {
     pub terrain: HashMap<Hex, Terrain>,
     pub mineral_nodes: HashMap<Hex, MineralNode>,
     pub coal_nodes: HashMap<Hex, CoalNode>,
-    pub scrap: Scrap,
+    pub scrap: HashMap<Hex, Scrap>,
 }
 
 impl Chunk {
