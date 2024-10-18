@@ -118,7 +118,7 @@ impl Unit {
 }
 
 #[derive(Default, Clone, Copy, Serialize, Debug)]
-pub struct UnitBody(EnumMap<UnitPart, u32>);
+pub struct UnitBody(pub EnumMap<UnitPart, u32>);
 
 impl UnitBody {
     pub fn cost(&self) -> HashMap<Resource, u32> {
