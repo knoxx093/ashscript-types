@@ -11,7 +11,7 @@ use crate::{
     },
     intents::{self, Intent, Intents},
     objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
-    player::OwnerId,
+    player::PlayerId,
     resource::Resource,
     storage::Storage,
 };
@@ -22,7 +22,7 @@ pub type Units = HashMap<Hex, Unit>;
 pub struct Unit {
     pub id: Uuid,
     pub kind: GameObjectKind,
-    pub owner_id: OwnerId,
+    pub owner_id: PlayerId,
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,

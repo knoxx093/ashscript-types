@@ -3,7 +3,7 @@ use hexx::Hex;
 use serde::Serialize;
 use uuid::Uuid;
 
-use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::OwnerId, storage::Storage};
+use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::PlayerId, storage::Storage};
 
 pub type Factories = HashMap<Hex, Factory>;
 
@@ -11,7 +11,7 @@ pub type Factories = HashMap<Hex, Factory>;
 pub struct Factory {
     pub id: Uuid,
     pub kind: GameObjectKind,
-    pub owner_id: OwnerId,
+    pub owner_id: PlayerId,
     pub energy: u32,
     pub hex: Hex,
     pub progress: u32,

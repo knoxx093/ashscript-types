@@ -3,7 +3,7 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use serde::Serialize;
 
-use crate::{structures::{factory::Factories, turret::Turrets}, unit::Units};
+use crate::{structures::{factory::Factories, turret::Turrets}, terrain::{CoalNode, MineralNode, Scrap, Terrain}, unit::Units};
 
 pub type Chunks = HashMap<Hex, Chunk>;
 
@@ -13,6 +13,10 @@ pub struct Chunk {
     pub units: Units,
     pub turrets: Turrets,
     pub factories: Factories,
+    pub terrain: HashMap<Hex, Terrain>,
+    pub mineral_nodes: HashMap<Hex, MineralNode>,
+    pub coal_nodes: HashMap<Hex, CoalNode>,
+    pub scrap: Scrap,
 }
 
 impl Chunk {
