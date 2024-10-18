@@ -6,6 +6,7 @@ use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{fac
 #[derive(Default, Serialize, Clone)]
 pub struct Map {
     pub chunks: Chunks,
+    pub radius: u64,
 }
 
 impl Map {
