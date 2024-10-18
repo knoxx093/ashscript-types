@@ -1,4 +1,5 @@
 use enum_dispatch::enum_dispatch;
+use enum_iterator::Sequence;
 use hexx::Hex;
 use serde::Serialize;
 use uuid::Uuid;
@@ -13,7 +14,7 @@ pub trait HasHealth {
     fn health(&self) -> u32;
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Sequence)]
 pub enum Attackable {
     Unit,
     Turret,
@@ -28,7 +29,7 @@ pub trait HasStorage {
     fn storage(&self) -> &Storage;
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Sequence)]
 pub enum WithStorage {
     Unit,
     Turret,
