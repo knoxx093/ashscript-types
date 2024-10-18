@@ -1,7 +1,8 @@
 use hashbrown::HashMap;
 use serde::Serialize;
+use uuid::Uuid;
 
-pub type PlayerId = String;
+pub type PlayerId = Uuid;
 
 #[derive(Default, Serialize, Debug)]
 pub struct Player {
