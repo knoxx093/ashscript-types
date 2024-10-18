@@ -4,7 +4,7 @@ use uuid::Uuid;
 
 pub type PlayerId = Uuid;
 
-#[derive(Default, Serialize, Debug)]
+#[derive(Default, Serialize, Debug, Clone)]
 pub struct Player {
     pub name: String,
     pub public_memory: HashMap<String, String>,
