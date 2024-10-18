@@ -153,6 +153,7 @@ pub enum UnitPart {
     Battery,
     Shield,
     Fabricate,
+    Convert,
     RangeImprovement,
     DamageImprovement,
     GenerateImprovement,
