@@ -22,6 +22,14 @@ impl Storage {
         }
     }
 
+    pub fn is_allowed(&self, resource: &Resource) -> bool {
+        let Some(allowed_inputs) = &self.allowed_inputs else {
+            return true;
+        };
+
+        allowed_inputs.contains(resource)
+    }
+
     pub fn has_sufficient(&self, cost: &HashMap<Resource, u32>) -> bool {
         for (resource, amount) in cost.iter() {
             let Some(has) = self.resources.get(resource) else {
@@ -37,9 +45,11 @@ impl Storage {
     }
 
     pub fn subtract_checked(&mut self, resource: &Resource, amount: &u32) -> Result<(), Resource> {
-        let Some(has) = self.resources.get(resource) else {
+        if !self.is_allowed(resource) {
             return Err(*resource);
-        };
+        }
+
+        let has = self.resources.get(resource).unwrap_or(&0);
 
         if has < amount {
             return Err(*resource);
@@ -50,9 +60,11 @@ impl Storage {
     }
 
     pub fn add_checked(&mut self, resource: &Resource, amount: &u32) -> Result<(), Resource> {
-        let Some(has) = self.resources.get(resource) else {
+        if !self.is_allowed(resource) {
             return Err(*resource);
-        };
+        }
+
+        let has = self.resources.get(resource).unwrap_or(&0);
 
         if has + amount > self.capacity {
             return Err(*resource);
