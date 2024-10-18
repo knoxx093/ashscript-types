@@ -11,7 +11,7 @@ use crate::{
     },
     intents::{self, Intent, Intents},
     objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
-    player::PlayerId,
+    player::{Player, PlayerId},
     resource::Resource,
     storage::Storage,
 };
@@ -63,12 +63,13 @@ impl HasStorage for Unit {
 }
 
 impl Unit {
-    pub fn new(hex: Hex, name: String, body: UnitBody) -> Self {
+    pub fn new(hex: Hex, name: String, body: UnitBody, owner_id: PlayerId) -> Self {
         Self {
             health: body.health_with_shields(),
             body,
             name,
             hex,
+            owner_id,
             ..Default::default()
         }
     }
