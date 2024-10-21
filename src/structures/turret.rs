@@ -15,7 +15,6 @@ pub struct Turret {
     pub energy: u32,
     pub hex: Hex,
     pub health: u32,
-    pub storage: Storage,
     #[serde(skip)]
     pub future_health: u32,
     #[serde(skip)]
