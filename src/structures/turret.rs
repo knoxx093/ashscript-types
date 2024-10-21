@@ -39,12 +39,6 @@ impl HasHex for Turret {
     }
 }
 
-impl HasStorage for Turret {
-    fn storage(&self) -> &Storage {
-        &self.storage
-    }
-}
-
 impl Turret {
     pub fn attack_cost(&self) -> u32 {
         self.range() + self.damage()

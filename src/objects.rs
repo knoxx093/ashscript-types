@@ -32,7 +32,6 @@ pub trait HasStorage {
 #[derive(Clone, Copy, Debug, Sequence)]
 pub enum WithStorage {
     Unit,
-    Turret,
     Factory,
 }
 
