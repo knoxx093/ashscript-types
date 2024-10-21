@@ -72,13 +72,18 @@ impl Factory {
     }
 
     pub fn can_spawn_body(&self, parts: &[(UnitPart, u32)]) -> bool {
-        let mut cost: HashMap<Resource, u32> = HashMap::new();
         for (part, part_amount) in parts.iter() {
             let (resource, resource_amount) = UNIT_PART_COSTS[*part];
-            cost.insert(resource, resource_amount * part_amount);
+
+            if !self
+                .storage
+                .has_sufficient(&resource, &(resource_amount * part_amount))
+            {
+                return false;
+            }
         }
 
-        self.storage.has_sufficient(&cost)
+        true
     }
 
     pub fn spawn_unit_checked(
