@@ -30,7 +30,7 @@ impl Storage {
         allowed_inputs.contains(resource)
     }
 
-    pub fn has_sufficient(&self, cost: &HashMap<Resource, u32>) -> bool {
+    pub fn has_sufficient_many(&self, cost: &HashMap<Resource, u32>) -> bool {
         for (resource, amount) in cost.iter() {
             let Some(has) = self.resources.get(resource) else {
                 return false;
@@ -39,6 +39,18 @@ impl Storage {
             if has < amount {
                 return false;
             }
+        }
+
+        true
+    }
+
+    pub fn has_sufficient(&self, resource: &Resource, amount: &u32) -> bool {
+        let Some(has) = self.resources.get(resource) else {
+            return false;
+        };
+
+        if has < amount {
+            return false;
         }
 
         true
