@@ -1,13 +1,13 @@
 
 use hashbrown::HashMap;
 use hexx::Hex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{structures::{factory::Factories, turret::Turrets}, terrain::{CoalNode, MineralNode, Scrap, Terrain}, unit::Units};
 
 pub type Chunks = HashMap<Hex, Chunk>;
 
-#[derive(Default, Serialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone)]
 pub struct Chunk {
     pub chunk_hex: Hex,
     pub units: Units,

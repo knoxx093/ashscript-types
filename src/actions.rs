@@ -83,3 +83,10 @@ pub struct ObjectDestroyed {
     pub hex: Hex,
     pub kind: GameObjectKind,
 }
+
+#[derive(Debug)]
+pub struct UnitRechargeShield {
+    pub unit_hex: Hex,
+    pub amount: u32,
+}
+

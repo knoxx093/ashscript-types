@@ -1,13 +1,13 @@
 use hashbrown::HashMap;
 use hexx::Hex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::PlayerId, storage::Storage};
 
 pub type Turrets = HashMap<Hex, Turret>;
 
-#[derive(Serialize, Default, Clone)]
+#[derive(Serialize, Default, Deserialize, Clone)]
 pub struct Turret {
     pub id: Uuid,
     pub kind: GameObjectKind,

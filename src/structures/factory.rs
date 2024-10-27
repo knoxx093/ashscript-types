@@ -1,6 +1,6 @@
 use hashbrown::HashMap;
 use hexx::Hex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{
@@ -15,7 +15,7 @@ use crate::{
 
 pub type Factories = HashMap<Hex, Factory>;
 
-#[derive(Serialize, Default, Clone)]
+#[derive(Serialize, Default, Deserialize, Clone)]
 pub struct Factory {
     pub id: Uuid,
     pub kind: GameObjectKind,

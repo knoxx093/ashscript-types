@@ -1,11 +1,11 @@
 use std::hash::Hash;
 
 use hashbrown::{HashMap, HashSet};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::resource::{self, Resource};
 
-#[derive(Default, Serialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone)]
 pub struct Storage {
     pub resources: HashMap<Resource, u32>,
     #[serde(skip)]

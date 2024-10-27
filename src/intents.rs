@@ -74,3 +74,9 @@ pub struct ResourceTransfer {
     pub from_kind: WithStorage,
     pub to_kind: WithStorage,
 }
+
+pub struct UnitRechargeShield {
+    pub unit_hex: Hex,
+    pub amount: Option<u32>,
+}
+

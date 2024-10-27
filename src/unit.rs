@@ -1,7 +1,7 @@
 use enum_map::{enum_map, EnumMap};
 use hashbrown::HashMap;
 use hexx::Hex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{
@@ -18,7 +18,7 @@ use crate::{
 
 pub type Units = HashMap<Hex, Unit>;
 
-#[derive(Default, Serialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone)]
 pub struct Unit {
     pub id: Uuid,
     pub kind: GameObjectKind,
@@ -111,7 +111,7 @@ impl Unit {
     } */
 }
 
-#[derive(Default, Clone, Copy, Serialize, Debug)]
+#[derive(Default, Clone, Copy, Serialize, Deserialize, Debug)]
 pub struct UnitBody {
     pub parts: EnumMap<UnitPart, u32>,
     pub shield_health: u32,
@@ -183,7 +183,7 @@ impl UnitBody {
     }
 }
 
-#[derive(enum_map::Enum, Serialize, Clone, Copy, Debug)]
+#[derive(enum_map::Enum, Serialize, Deserialize, Clone, Copy, Debug)]
 pub enum UnitPart {
     Ranged,
     Harvest,

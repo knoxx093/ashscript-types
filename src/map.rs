@@ -1,9 +1,9 @@
 use hexx::Hex;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{factory::Factory, turret::Turret}, terrain::Terrain, unit::Unit};
 
-#[derive(Default, Serialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone)]
 pub struct Map {
     pub chunks: Chunks,
     pub radius: u32,
