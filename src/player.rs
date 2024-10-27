@@ -1,10 +1,10 @@
 use hashbrown::HashMap;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 pub type PlayerId = Uuid;
 
-#[derive(Default, Serialize, Debug, Clone)]
+#[derive(Default, Serialize, Deserialize, Debug, Clone)]
 pub struct Player {
     pub id: Uuid,
     pub name: String,
