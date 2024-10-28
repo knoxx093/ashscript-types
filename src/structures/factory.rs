@@ -15,7 +15,7 @@ use crate::{
 
 pub type Factories = HashMap<Hex, Factory>;
 
-#[derive(Serialize, Default, Deserialize, Clone)]
+#[derive(Serialize, Default, Deserialize, Clone, Debug)]
 pub struct Factory {
     pub id: Uuid,
     pub kind: GameObjectKind,

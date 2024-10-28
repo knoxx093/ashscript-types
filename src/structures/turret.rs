@@ -7,7 +7,7 @@ use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, pla
 
 pub type Turrets = HashMap<Hex, Turret>;
 
-#[derive(Serialize, Default, Deserialize, Clone)]
+#[derive(Serialize, Default, Deserialize, Clone, Debug)]
 pub struct Turret {
     pub id: Uuid,
     pub kind: GameObjectKind,

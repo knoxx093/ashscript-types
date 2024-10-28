@@ -7,7 +7,7 @@ use crate::{structures::{factory::Factories, turret::Turrets}, terrain::{CoalNod
 
 pub type Chunks = HashMap<Hex, Chunk>;
 
-#[derive(Default, Serialize, Deserialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Chunk {
     pub chunk_hex: Hex,
     pub units: Units,

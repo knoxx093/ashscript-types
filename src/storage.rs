@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::resource::{self, Resource};
 
-#[derive(Default, Serialize, Deserialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Storage {
     pub resources: HashMap<Resource, u32>,
     #[serde(skip)]

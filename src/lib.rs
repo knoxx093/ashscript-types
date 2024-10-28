@@ -11,5 +11,6 @@ pub mod player;
 pub mod global;
 pub mod objects;
 pub mod storage;
+pub mod keyframe;
 
 pub type IdType = String;
