@@ -7,3 +7,12 @@ pub struct KeyFrame {
     pub map: Map,
     pub global: Global,
 }
+
+impl KeyFrame {
+    pub fn from_existing(map: Map, global: Global) -> Self {
+        Self {
+            map,
+            global,
+        }
+    }
+}
