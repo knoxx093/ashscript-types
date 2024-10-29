@@ -6,7 +6,7 @@ use crate::{chunk::{Chunk, Chunks}, constants::map::CHUNK_SIZE, structures::{fac
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Map {
     pub chunks: Chunks,
-    pub radius: u32,
+    pub data: MapData,
 }
 
 impl Map {
@@ -97,4 +97,17 @@ impl Map {
             _ => None,
         }
     } */
+}
+
+#[derive(Default, Serialize, Deserialize, Clone, Debug)]
+pub struct MapData {
+    pub radius: u32,
+}
+
+impl MapData {
+    pub fn new() -> Self {
+        Self {
+            ..Default::default()
+        }
+    }
 }
