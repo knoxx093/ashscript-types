@@ -1,8 +1,11 @@
+use hashbrown::HashMap;
 use hexx::Hex;
 use ::serde::{Deserialize, Serialize};
 use uuid::{serde, Uuid};
 
 use crate::{objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage}, player::PlayerId, storage::Storage};
+
+pub type Distributors = HashMap<Hex, Distributor>;
 
 #[derive(Serialize, Default, Deserialize, Clone, Debug)]
 pub struct Distributor {
