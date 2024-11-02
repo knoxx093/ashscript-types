@@ -27,6 +27,7 @@ pub struct Unit {
     pub health: u32,
     pub hex: Hex,
     pub energy: u32,
+    pub energy_capacity: u32,
     pub age: u32,
     pub body: UnitBody,
     pub storage: Storage,

@@ -19,6 +19,8 @@ pub enum Attackable {
     Unit,
     Turret,
     Factory,
+    Assembler,
+    Distributor,
 }
 
 pub trait HasId {
@@ -33,6 +35,8 @@ pub trait HasStorage {
 pub enum WithStorage {
     Unit,
     Factory,
+    Assembler,
+    Distributor,
 }
 
 #[derive(Clone, Copy, Debug, Sequence)]
@@ -61,6 +65,8 @@ pub enum GameObjectKind {
     Unit,
     Turret,
     Factory,
+    Distributor,
+    Assembler,
     #[default]
     Unknown,
 }
