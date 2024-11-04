@@ -1,0 +1,1 @@
+pub struct Energy(pub u32);

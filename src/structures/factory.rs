@@ -4,58 +4,19 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{
-    constants::general::{IntentReturnCode, UNIT_PART_COSTS},
-    intents::{self, Intent, Intents},
-    objects::{GameObjectKind, HasHealth, HasHex, HasId, HasStorage},
-    player::PlayerId,
-    resource::Resource,
-    storage::Storage,
-    unit::{UnitBody, UnitPart},
+    components::body::{UnitBody, UnitPart}, constants::general::{IntentReturnCode, UNIT_PART_COSTS}, intents::{self, Intent, Intents}, objects::GameObjectKind, player::PlayerId
 };
 
 pub type Factories = HashMap<Hex, Factory>;
 
 #[derive(Serialize, Default, Deserialize, Clone, Debug)]
-pub struct Factory {
-    pub id: Uuid,
-    pub kind: GameObjectKind,
-    pub owner_id: PlayerId,
-    pub energy: u32,
-    pub hex: Hex,
-    pub progress: u32,
-    pub health: u32,
-    pub storage: Storage,
-    #[serde(skip)]
-    pub future_health: u32,
-    #[serde(skip)]
-    pub future_energy: u32,
+pub struct Factory;
+
+pub fn new_factory() {
+
 }
 
-impl HasHealth for Factory {
-    fn health(&self) -> u32 {
-        self.health
-    }
-}
-
-impl HasId for Factory {
-    fn id(&self) -> Uuid {
-        self.id
-    }
-}
-
-impl HasHex for Factory {
-    fn hex(&self) -> Hex {
-        self.hex
-    }
-}
-
-impl HasStorage for Factory {
-    fn storage(&self) -> &Storage {
-        &self.storage
-    }
-}
-
-impl Factory {
+/* impl Factory {
     pub fn spawn_unit(
         &self,
         name: String,
@@ -104,3 +65,4 @@ impl Factory {
         Ok(())
     }
 }
+ */

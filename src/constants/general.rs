@@ -2,7 +2,7 @@ use enum_map::{enum_map, EnumMap};
 use hashbrown::HashSet;
 use lazy_static::lazy_static;
 
-use crate::{resource::Resource, unit::UnitPart};
+use crate::{components::body::UnitPart, resource::Resource};
 
 lazy_static! {
     pub static ref RESOURCE_INPUTS: EnumMap<Resource, HashSet<Resource>> = enum_map! {

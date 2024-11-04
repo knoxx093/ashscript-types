@@ -2,7 +2,7 @@ use hashbrown::HashMap;
 use hexx::Hex;
 use uuid::Uuid;
 
-use crate::{objects::{Attackable, GameObjectKind, HasStorage, WithStorage}, resource::Resource, unit::UnitBody};
+use crate::{components::body::UnitBody, objects::GameObjectKind, resource::Resource};
 
 // REMINDER: These are intents that the server validates and wants executed
 
@@ -35,7 +35,7 @@ pub struct UnitMove {
 pub struct UnitAttack {
     pub attacker_hex: Hex,
     pub target_hex: Hex,
-    pub target_kind: Attackable,
+    pub target_kind: GameObjectKind,
     pub cost: u32,
     pub damage: u32,
 }
@@ -44,7 +44,7 @@ pub struct UnitAttack {
 pub struct TurretAttack {
     pub turret_hex: Hex,
     pub target_hex: Hex,
-    pub target_kind: Attackable,
+    pub target_kind: GameObjectKind,
     pub damage: u32,
     pub cost: u32,
 }
@@ -72,9 +72,9 @@ pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
     pub from: Hex,
-    pub from_kind: WithStorage,
+    pub from_kind: GameObjectKind,
     pub to_hex: Hex,
-    pub to_kind: WithStorage,
+    pub to_kind: GameObjectKind,
 }
 
 #[derive(Debug)]

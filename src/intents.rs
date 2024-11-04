@@ -1,6 +1,6 @@
 use hexx::Hex;
 
-use crate::{objects::{Attackable, WithStorage}, resource::Resource, unit::UnitBody};
+use crate::{components::body::UnitBody, objects::GameObjectKind, resource::Resource};
 
 // REMINDER: These are player-generated intents
 
@@ -35,14 +35,14 @@ pub struct UnitMove {
 pub struct UnitAttack {
     pub attacker_hex: Hex,
     pub target_hex: Hex,
-    pub target_kind: Attackable,
+    pub target_kind: GameObjectKind,
 }
 
 /// A turret attacking an attackable target
 pub struct TurretAttack {
     pub turret_hex: Hex,
     pub target_hex: Hex,
-    pub target_kind: Attackable,
+    pub target_kind: GameObjectKind,
 }
 
 /// The spawning of a unit from a factory
@@ -71,8 +71,8 @@ pub struct ResourceTransfer {
     pub amount: u32,
     pub from_hex: Hex,
     pub to_hex: Hex,
-    pub from_kind: WithStorage,
-    pub to_kind: WithStorage,
+    pub from_kind: GameObjectKind,
+    pub to_kind: GameObjectKind,
 }
 
 pub struct UnitRechargeShield {

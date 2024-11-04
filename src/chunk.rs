@@ -1,29 +1,24 @@
+use std::hash::Hash;
+
 use hashbrown::HashMap;
 use hexx::Hex;
 use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
 use crate::{
-    structures::{
+    objects::GameObjectKind, structures::{
         assembler::Assemblers, distributor::Distributors, factory::Factories, turret::Turrets,
-    },
-    terrain::{CoalNode, MineralNode, Scrap, Terrain},
-    unit::Units,
+    }, unit::Units
 };
 
 pub type Chunks = HashMap<Hex, Chunk>;
 
+pub type Entity = Uuid;
+
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Chunk {
-    pub chunk_hex: Hex,
-    pub units: Units,
-    pub turrets: Turrets,
-    pub factories: Factories,
-    pub assemblers: Assemblers,
-    pub distributors: Distributors,
-    pub terrain: HashMap<Hex, Terrain>,
-    pub mineral_nodes: HashMap<Hex, MineralNode>,
-    pub coal_nodes: HashMap<Hex, CoalNode>,
-    pub scrap: HashMap<Hex, Scrap>,
+    pub hex: Hex,
+    pub entities: HashMap<GameObjectKind, HashMap<Hex, Entity>>,
 }
 
 impl Chunk {
