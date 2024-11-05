@@ -1,6 +1,7 @@
 use std::hash::Hash;
 
 use hashbrown::HashMap;
+use hecs::Entity;
 use hexx::Hex;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -12,8 +13,6 @@ use crate::{
 };
 
 pub type Chunks = HashMap<Hex, Chunk>;
-
-pub type Entity = Uuid;
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Chunk {
