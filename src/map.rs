@@ -26,6 +26,16 @@ impl Map {
             ..Default::default()
         }
     }
+
+    pub fn chunk_at(&self, hex: &Hex) -> Option<&Chunk> {
+        let chunk_hex = hex.to_lower_res(CHUNK_SIZE);
+        self.chunks.get(&chunk_hex)
+    }
+
+    pub fn chunk_at_mut(&mut self, hex: &Hex) -> Option<&mut Chunk> {
+        let chunk_hex = hex.to_lower_res(CHUNK_SIZE);
+        self.chunks.get_mut(&chunk_hex)
+    }
 }
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
