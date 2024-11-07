@@ -1,12 +1,13 @@
 use hashbrown::HashMap;
 use hexx::Hex;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::{components::body::UnitBody, objects::GameObjectKind, resource::Resource};
 
 // REMINDER: These are intents that the server validates and wants executed
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Serialize, Deserialize, Clone)]
 pub struct ActionsByKind {
     pub unit_move: Vec<UnitMove>,
     pub unit_attack: Vec<UnitAttack>,
@@ -24,14 +25,14 @@ impl ActionsByKind {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UnitMove {
     pub from: Hex,
     pub to: Hex,
     pub cost: u32,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UnitAttack {
     pub attacker_hex: Hex,
     pub target_hex: Hex,
@@ -40,7 +41,7 @@ pub struct UnitAttack {
     pub damage: u32,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct TurretAttack {
     pub turret_hex: Hex,
     pub target_hex: Hex,
@@ -49,7 +50,7 @@ pub struct TurretAttack {
     pub cost: u32,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct FactorySpawnUnit {
     pub factory_hex: Hex,
     pub out: Hex,
@@ -58,7 +59,7 @@ pub struct FactorySpawnUnit {
     pub cost: HashMap<Resource, u32>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UnitSpawnUnit {
     pub parent_hex: Hex,
     pub out: Hex,
@@ -67,7 +68,7 @@ pub struct UnitSpawnUnit {
     pub cost: HashMap<Resource, u32>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ResourceTransfer {
     pub resource: Resource,
     pub amount: u32,
@@ -77,14 +78,14 @@ pub struct ResourceTransfer {
     pub to_kind: GameObjectKind,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 // Doesn't need to be used when the object is knowably destroyed due to other actions (such as being attacked such that health is at or below 0)
 pub struct ObjectDestroyed {
     pub hex: Hex,
     pub kind: GameObjectKind,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UnitRechargeShield {
     pub unit_hex: Hex,
     pub amount: u32,
