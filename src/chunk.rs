@@ -1,5 +1,6 @@
 use std::hash::Hash;
 
+use enum_map::EnumMap;
 use hashbrown::HashMap;
 use hecs::Entity;
 use hexx::Hex;
@@ -17,7 +18,7 @@ pub type Chunks = HashMap<Hex, Chunk>;
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Chunk {
     pub hex: Hex,
-    pub entities: HashMap<GameObjectKind, HashMap<Hex, Entity>>,
+    pub entities: EnumMap<GameObjectKind, HashMap<Hex, Entity>>,
 }
 
 impl Chunk {

@@ -1,5 +1,6 @@
 use enum_dispatch::enum_dispatch;
 use enum_iterator::Sequence;
+use enum_map::Enum;
 use hexx::Hex;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -11,7 +12,7 @@ use crate::{
 
 /// Each type has its own storage inside of a chunk, and cannot share a hex/tile with another of its own type (ex: two units cannot be on the same tile)
 /// Not exactly sure if this is useful anywhere
-#[derive(Serialize, Deserialize, Clone, Copy, Default, Eq, PartialEq, Hash, Debug, Sequence)]
+#[derive(Serialize, Deserialize, Clone, Copy, Default, Eq, PartialEq, Hash, Debug, Sequence, Enum)]
 pub enum GameObjectKind {
     Unit,
     Turret,
