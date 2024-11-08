@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct ResourceNode {
-    amount: u32
+    pub amount: u32
 }
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
