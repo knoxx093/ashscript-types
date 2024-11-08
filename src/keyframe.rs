@@ -15,7 +15,7 @@ pub struct KeyFrame {
 }
 
 impl KeyFrame {
-    pub fn from_existing(map: Map, world: World, global: Global, actions: ActionsByKind) -> Self {
+    pub fn from_existing(map: Map, world: &World, global: Global, actions: ActionsByKind) -> Self {
         Self {
             map,
             world_data: serialize_world_data(&world),
