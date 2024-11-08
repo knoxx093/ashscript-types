@@ -19,6 +19,7 @@ pub enum GameObjectKind {
     Factory,
     Distributor,
     Assembler,
+    Terrain,
     #[default]
     Unknown,
 }
