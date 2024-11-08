@@ -18,4 +18,6 @@ glam="0.27.0"
 uuid = {version="1.10.0", features = ["serde", "v4"] }
 enum_dispatch = "0.3.13"
 enum-iterator = "2.1.0"
-hecs = { version = "0.10.5", features = ["serde"] }
+hecs = { version = "0.10.5", features = ["serde", "column-serialize", "row-serialize"] }
+postcard = { version = "1.0.10", features = ["use-std"] }
+bitcode = { version = "0.6.3", features = ["serde"] }

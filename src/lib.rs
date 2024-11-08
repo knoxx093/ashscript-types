@@ -13,5 +13,6 @@ pub mod keyframe;
 pub mod messages;
 pub mod entity;
 pub mod components;
+pub mod world;
 
 pub type IdType = String;
