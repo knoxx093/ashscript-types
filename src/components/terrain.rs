@@ -7,6 +7,14 @@ pub struct Terrain {
     pub kind: TerrainKind,
 }
 
+impl Terrain {
+    pub fn new(kind: TerrainKind) -> Self {
+        Self {
+            kind,
+        }
+    }
+}
+
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub enum TerrainKind {
     Wall,
