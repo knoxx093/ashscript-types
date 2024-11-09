@@ -176,6 +176,23 @@ impl SerializeContext for SaveContextSerialize {
     fn component_count(&self, archetype: &Archetype) -> usize {
         archetype
             .component_types()
+            .filter(|&t| {
+                t == TypeId::of::<Owner>()
+                    || t == TypeId::of::<ResourceNode>()
+                    || t == TypeId::of::<CoalNode>()
+                    || t == TypeId::of::<MineralNode>()
+                    || t == TypeId::of::<UraniumNode>()
+                    || t == TypeId::of::<Shield>()
+                    || t == TypeId::of::<Spawning>()
+                    || t == TypeId::of::<UnitBody>()
+                    || t == TypeId::of::<Energy>()
+                    || t == TypeId::of::<Storage>()
+                    || t == TypeId::of::<Terrain>()
+                    || t == TypeId::of::<Wall>()
+                    || t == TypeId::of::<Lava>()
+                    || t == TypeId::of::<Plain>()
+                    || t == TypeId::of::<Tile>()
+            })
             .count()
     }
 
