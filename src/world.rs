@@ -234,7 +234,9 @@ pub fn serialize_world_data(world: &World) -> Vec<u8> {
 
     let _ = hecs::serialize::column::serialize(world, &mut SaveContextSerialize::default(), &mut serializer);
 
-    print!("test vec: {:?}", buffer_vec);
+    println!("buffer slice {:?}", buffer);
+    // println!("buffer storage {:#?}", buffer_storage);
+    // println!("serializer {:#?}", serializer);
     buffer_vec
 }
 
