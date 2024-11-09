@@ -4,7 +4,7 @@ use hecs::serialize::column::{
     deserialize_column, try_serialize, try_serialize_id, DeserializeContext, SerializeContext,
 };
 use hecs::{Archetype, ColumnBatchBuilder, ColumnBatchType, World};
-use postcard::ser_flavors::Slice;
+use postcard::ser_flavors::{AllocVec, Flavor, HVec, Slice};
 use serde::{Deserialize, Serialize};
 
 use crate::components::body::UnitBody;
@@ -247,14 +247,18 @@ pub fn serialize_world_data(world: &World) -> Vec<u8> {
     let mut buffer_vec: Vec<u8> = vec![];
     let buffer: &mut [u8] = buffer_vec.as_mut_slice();
     let buffer_storage: Slice = Slice::new(buffer);
-    let mut serializer = postcard::Serializer { output: buffer_storage };
+    let mut hbufff: AllocVec<> = AllocVec::new();
+    let _ = hbufff.try_extend(&buffer);
+    let mut serializer = postcard::Serializer { output: hbufff };
 
     let _ = hecs::serialize::column::serialize(world, &mut SaveContextSerialize::default(), &mut serializer);
 
-    println!("buffer slice {:?}", buffer);
+    // println!("buffer slice {:?}", buffer);
     // println!("buffer storage {:#?}", buffer_storage);
     // println!("serializer {:#?}", serializer);
-    buffer_vec
+    buffer_vec;
+
+    serializer.output.finalize().ok().unwrap()
 }
 
 pub fn deserialize_world_data(
@@ -263,6 +267,24 @@ pub fn deserialize_world_data(
 
     let mut deserializer = postcard::Deserializer::from_bytes(&world_data);
     hecs::serialize::column::deserialize(&mut SaveContextDeserialize::default(), &mut deserializer).ok()
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::unit::Unit;
+
+    use super::*;
+
+    #[test]
+    fn test_serialize_world_data() {
+        let mut world = World::default();
+        world.spawn((Unit::default(), UnitBody::default(), Energy::default()));
+        let data = serialize_world_data(&world);
+        println!("resultant data {:#?}", data);
+        
+        println!("running test serialize_world_data");
+
+    }
 }
 
 /* impl<'de> Deserialize<'de> for World {
