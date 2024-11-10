@@ -3,7 +3,7 @@ use hexx::Hex;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::{components::body::UnitBody, objects::GameObjectKind, resource::Resource};
+use crate::{components::body::UnitBody, objects::GameObjectKind, player::PlayerId, resource::Resource};
 
 // REMINDER: These are intents that the server validates and wants executed
 
@@ -57,6 +57,7 @@ pub struct FactorySpawnUnit {
     pub body: UnitBody,
     pub name: String,
     pub cost: HashMap<Resource, u32>,
+    pub owner: PlayerId,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -66,6 +67,7 @@ pub struct UnitSpawnUnit {
     pub body: UnitBody,
     pub name: String,
     pub cost: HashMap<Resource, u32>,
+    pub owner: PlayerId,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

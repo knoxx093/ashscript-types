@@ -1,6 +1,6 @@
 use hexx::Hex;
 
-use crate::{components::body::UnitBody, objects::GameObjectKind, resource::Resource};
+use crate::{components::body::UnitBody, objects::GameObjectKind, player::PlayerId, resource::Resource};
 
 // REMINDER: These are player-generated intents
 
@@ -53,6 +53,7 @@ pub struct FactorySpawnUnit {
     /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
     /// If out hexes are provided, sucessfully spawned units will be outputed to the first empty hex 
     pub out: Option<Vec<Hex>>,
+    pub owner: PlayerId,
 }
 
 /// The spawning of a unit from a unit
@@ -63,6 +64,7 @@ pub struct UnitSpawnUnit {
     /// If out hexes are not provided the engine will choose the first empty one in a clockwise direction
     /// If out hexes are provided, sucessfully spawned units will be outputed to the first empty hex 
     pub out: Option<Vec<Hex>>,
+    pub owner: PlayerId,
 }
 
 /// A resource transfer from one storable object to another
