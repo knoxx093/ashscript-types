@@ -22,8 +22,9 @@ pub struct Chunk {
 }
 
 impl Chunk {
-    pub fn new() -> Self {
+    pub fn new(hex: Hex) -> Self {
         Self {
+            hex,
             ..Default::default()
         }
     }
