@@ -7,11 +7,7 @@ use hexx::Hex;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::{
-    objects::GameObjectKind, structures::{
-        assembler::Assemblers, distributor::Distributors, factory::Factories, turret::Turrets,
-    }, unit::Units
-};
+use crate::objects::GameObjectKind;
 
 pub type Chunks = HashMap<Hex, Chunk>;
 

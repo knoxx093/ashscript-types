@@ -7,8 +7,11 @@ use hecs::{Archetype, ColumnBatchBuilder, ColumnBatchType, World};
 use postcard::ser_flavors::{AllocVec, Flavor, HVec, Slice};
 use serde::{Deserialize, Serialize};
 
+use crate::components::assembler::Assembler;
 use crate::components::body::UnitBody;
+use crate::components::distributor::Distributor;
 use crate::components::energy::Energy;
+use crate::components::factory::Factory;
 use crate::components::owner::Owner;
 use crate::components::resource::{CoalNode, MineralNode, ResourceNode, UraniumNode};
 use crate::components::shield::Shield;
@@ -16,6 +19,8 @@ use crate::components::spawn::Spawning;
 use crate::components::storage::Storage;
 use crate::components::terrain::{Lava, Plain, Terrain, Wall};
 use crate::components::tile::Tile;
+use crate::components::turret::Turret;
+use crate::components::unit::Unit;
 
 pub struct WorldWrapper(pub World);
 
@@ -39,6 +44,11 @@ enum ComponentId {
     Lava,
     Plain,
     Tile,
+    Unit,
+    Assembler,
+    Distributor,
+    Factory,
+    Turret,
 }
 
 // We need to implement context types for the hecs serialization process:
@@ -48,13 +58,12 @@ struct SaveContextSerialize {}
 struct SaveContextDeserialize {
     components: Vec<ComponentId>,
 }
-
 impl DeserializeContext for SaveContextDeserialize {
     fn deserialize_component_ids<'de, A>(&mut self, mut seq: A) -> Result<ColumnBatchType, A::Error>
     where
         A: serde::de::SeqAccess<'de>,
     {
-        self.components.clear(); // Discard data from the previous archetype
+        self.components.clear();
         let mut batch = ColumnBatchType::new();
         while let Some(id) = seq.next_element()? {
             match id {
@@ -103,6 +112,21 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Tile => {
                     batch.add::<Tile>();
                 }
+                ComponentId::Unit => {
+                    batch.add::<Unit>();
+                }
+                ComponentId::Turret => {
+                    batch.add::<Turret>();
+                }
+                ComponentId::Factory => {
+                    batch.add::<Factory>();
+                }
+                ComponentId::Assembler => {
+                    batch.add::<Assembler>();
+                }
+                ComponentId::Distributor => {
+                    batch.add::<Distributor>();
+                }
             }
             self.components.push(id);
         }
@@ -118,7 +142,6 @@ impl DeserializeContext for SaveContextDeserialize {
     where
         A: serde::de::SeqAccess<'de>,
     {
-        // Decode component data in the order that the component IDs appeared
         for component in &self.components {
             match *component {
                 ComponentId::Owner => {
@@ -166,6 +189,21 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Tile => {
                     deserialize_column::<Tile, _>(entity_count, &mut seq, batch)?;
                 }
+                ComponentId::Unit => {
+                    deserialize_column::<Unit, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::Turret => {
+                    deserialize_column::<Turret, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::Factory => {
+                    deserialize_column::<Factory, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::Assembler => {
+                    deserialize_column::<Assembler, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::Distributor => {
+                    deserialize_column::<Distributor, _>(entity_count, &mut seq, batch)?;
+                }
             }
         }
         Ok(())
@@ -192,6 +230,11 @@ impl SerializeContext for SaveContextSerialize {
                     || t == TypeId::of::<Lava>()
                     || t == TypeId::of::<Plain>()
                     || t == TypeId::of::<Tile>()
+                    || t == TypeId::of::<Unit>()
+                    || t == TypeId::of::<Turret>()
+                    || t == TypeId::of::<Factory>()
+                    || t == TypeId::of::<Assembler>()
+                    || t == TypeId::of::<Distributor>()
             })
             .count()
     }
@@ -216,6 +259,11 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize_id::<Lava, _, _>(archetype, &ComponentId::Lava, &mut out)?;
         try_serialize_id::<Plain, _, _>(archetype, &ComponentId::Plain, &mut out)?;
         try_serialize_id::<Tile, _, _>(archetype, &ComponentId::Tile, &mut out)?;
+        try_serialize_id::<Unit, _, _>(archetype, &ComponentId::Unit, &mut out)?;
+        try_serialize_id::<Turret, _, _>(archetype, &ComponentId::Turret, &mut out)?;
+        try_serialize_id::<Factory, _, _>(archetype, &ComponentId::Factory, &mut out)?;
+        try_serialize_id::<Assembler, _, _>(archetype, &ComponentId::Assembler, &mut out)?;
+        try_serialize_id::<Distributor, _, _>(archetype, &ComponentId::Distributor, &mut out)?;
         out.end()
     }
 
@@ -239,6 +287,11 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize::<Lava, _>(archetype, &mut out)?;
         try_serialize::<Plain, _>(archetype, &mut out)?;
         try_serialize::<Tile, _>(archetype, &mut out)?;
+        try_serialize::<Unit, _>(archetype, &mut out)?;
+        try_serialize::<Turret, _>(archetype, &mut out)?;
+        try_serialize::<Factory, _>(archetype, &mut out)?;
+        try_serialize::<Assembler, _>(archetype, &mut out)?;
+        try_serialize::<Distributor, _>(archetype, &mut out)?;
         out.end()
     }
 }
@@ -271,7 +324,6 @@ pub fn deserialize_world_data(
 
 #[cfg(test)]
 mod tests {
-    use crate::unit::Unit;
 
     use super::*;
 

@@ -9,3 +9,8 @@ pub mod game_object;
 pub mod owner;
 pub mod resource;
 pub mod terrain;
+pub mod turret;
+pub mod factory;
+pub mod assembler;
+pub mod distributor;
+pub mod unit;

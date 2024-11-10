@@ -11,8 +11,6 @@ use crate::{
     constants::map::CHUNK_SIZE,
     entity::Component,
     objects::GameObjectKind,
-    structures::{factory::Factory, turret::Turret},
-    unit::Unit,
 };
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
