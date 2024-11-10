@@ -12,6 +12,7 @@ use crate::components::body::UnitBody;
 use crate::components::distributor::Distributor;
 use crate::components::energy::Energy;
 use crate::components::factory::Factory;
+use crate::components::occupies::Occupies;
 use crate::components::owner::Owner;
 use crate::components::resource::{CoalNode, MineralNode, ResourceNode, UraniumNode};
 use crate::components::shield::Shield;
@@ -49,6 +50,7 @@ enum ComponentId {
     Distributor,
     Factory,
     Turret,
+    Occupies,
 }
 
 // We need to implement context types for the hecs serialization process:
@@ -127,6 +129,9 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Distributor => {
                     batch.add::<Distributor>();
                 }
+                ComponentId::Occupies => {
+                    batch.add::<Occupies>();
+                }
             }
             self.components.push(id);
         }
@@ -204,6 +209,9 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Distributor => {
                     deserialize_column::<Distributor, _>(entity_count, &mut seq, batch)?;
                 }
+                ComponentId::Occupies => {
+                    deserialize_column::<Occupies, _>(entity_count, &mut seq, batch)?;
+                }
             }
         }
         Ok(())
@@ -235,6 +243,7 @@ impl SerializeContext for SaveContextSerialize {
                     || t == TypeId::of::<Factory>()
                     || t == TypeId::of::<Assembler>()
                     || t == TypeId::of::<Distributor>()
+                    || t == TypeId::of::<Occupies>()
             })
             .count()
     }
@@ -264,6 +273,7 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize_id::<Factory, _, _>(archetype, &ComponentId::Factory, &mut out)?;
         try_serialize_id::<Assembler, _, _>(archetype, &ComponentId::Assembler, &mut out)?;
         try_serialize_id::<Distributor, _, _>(archetype, &ComponentId::Distributor, &mut out)?;
+        try_serialize_id::<Occupies, _, _>(archetype, &ComponentId::Occupies, &mut out)?;
         out.end()
     }
 
@@ -292,6 +302,7 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize::<Factory, _>(archetype, &mut out)?;
         try_serialize::<Assembler, _>(archetype, &mut out)?;
         try_serialize::<Distributor, _>(archetype, &mut out)?;
+        try_serialize::<Occupies, _>(archetype, &mut out)?;
         out.end()
     }
 }

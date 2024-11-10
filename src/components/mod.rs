@@ -14,3 +14,4 @@ pub mod factory;
 pub mod assembler;
 pub mod distributor;
 pub mod unit;
+pub mod occupies;

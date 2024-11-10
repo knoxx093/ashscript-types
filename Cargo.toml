@@ -1,6 +1,6 @@
 [package]
 name = "ashscript-types"
-version = "0.10.22"
+version = "0.10.23"
 edition = "2021"
 authors=["Ashscript Contributors"]
 description="Types for Ashcript Game game and action states"
