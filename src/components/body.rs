@@ -51,11 +51,11 @@ impl UnitBody {
         cost
     }
 
-    pub fn weight(&self) -> u32 {
-        let mut weight = 0;
+    pub fn weight(&self) -> f32 {
+        let mut weight = 0.;
 
         for (part, count) in self.parts.iter() {
-            weight += UNIT_PART_WEIGHTS[part] * count;
+            weight += UNIT_PART_WEIGHTS[part] * (*count as f32);
         }
 
         weight

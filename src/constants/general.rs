@@ -13,12 +13,12 @@ lazy_static! {
         Resource::Minerals => HashSet::new(),
         Resource::Uranium => HashSet::new(),
     };
-    pub static ref UNIT_PART_WEIGHTS: EnumMap<UnitPart, u32> = enum_map! {
-        UnitPart::Ranged => 5,
-        UnitPart::Generate => 2,
-        UnitPart::Battery => 4,
-        UnitPart::Harvest => 2,
-        _ => 1,
+    pub static ref UNIT_PART_WEIGHTS: EnumMap<UnitPart, f32> = enum_map! {
+        UnitPart::Ranged => 0.3,
+        UnitPart::Generate => 0.2,
+        UnitPart::Battery => 0.1,
+        UnitPart::Harvest => 0.1,
+        _ => 0.1,
     };
     pub static ref UNIT_PART_COSTS: EnumMap<UnitPart, (Resource, u32)> = enum_map! {
         UnitPart::Ranged => (Resource::Metal, 8),
