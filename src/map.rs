@@ -40,6 +40,11 @@ impl Map {
         let chunk = self.chunk_at(hex)?;
         chunk.entities[kind].get(hex)
     }
+
+    pub fn remove_entity(&mut self, hex: &Hex, kind: GameObjectKind) -> Option<Entity> {
+        let chunk = self.chunk_at_mut(hex)?;
+        chunk.entities[kind].remove(hex)
+    }
 }
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
