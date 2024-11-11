@@ -22,6 +22,7 @@ use crate::components::terrain::{Lava, Plain, Terrain, Wall};
 use crate::components::tile::Tile;
 use crate::components::turret::Turret;
 use crate::components::unit::Unit;
+use crate::objects::GameObjectKind;
 
 pub struct WorldWrapper(pub World);
 
@@ -30,6 +31,7 @@ fn serialize_archetypes() {}
 // Identifiers for the components we want to include in the serialization process:
 #[derive(Serialize, Deserialize)]
 enum ComponentId {
+    GameObjectKind,
     Owner,
     ResourceNode,
     CoalNode,
@@ -69,6 +71,9 @@ impl DeserializeContext for SaveContextDeserialize {
         let mut batch = ColumnBatchType::new();
         while let Some(id) = seq.next_element()? {
             match id {
+                ComponentId::GameObjectKind => {
+                    batch.add::<GameObjectKind>();
+                }
                 ComponentId::Owner => {
                     batch.add::<Owner>();
                 }
@@ -149,6 +154,9 @@ impl DeserializeContext for SaveContextDeserialize {
     {
         for component in &self.components {
             match *component {
+                ComponentId::GameObjectKind => {
+                    deserialize_column::<GameObjectKind, _>(entity_count, &mut seq, batch)?;
+                }
                 ComponentId::Owner => {
                     deserialize_column::<Owner, _>(entity_count, &mut seq, batch)?;
                 }
@@ -223,7 +231,7 @@ impl SerializeContext for SaveContextSerialize {
         archetype
             .component_types()
             .filter(|&t| {
-                t == TypeId::of::<Owner>()
+                t == TypeId::of::<GameObjectKind>() || t == TypeId::of::<Owner>()
                     || t == TypeId::of::<ResourceNode>()
                     || t == TypeId::of::<CoalNode>()
                     || t == TypeId::of::<MineralNode>()
@@ -253,6 +261,7 @@ impl SerializeContext for SaveContextSerialize {
         archetype: &Archetype,
         mut out: S,
     ) -> Result<S::Ok, S::Error> {
+        try_serialize_id::<GameObjectKind, _, _>(archetype, &ComponentId::GameObjectKind, &mut out)?;
         try_serialize_id::<Owner, _, _>(archetype, &ComponentId::Owner, &mut out)?;
         try_serialize_id::<ResourceNode, _, _>(archetype, &ComponentId::ResourceNode, &mut out)?;
         try_serialize_id::<CoalNode, _, _>(archetype, &ComponentId::CoalNode, &mut out)?;
@@ -282,6 +291,7 @@ impl SerializeContext for SaveContextSerialize {
         archetype: &Archetype,
         mut out: S,
     ) -> Result<S::Ok, S::Error> {
+        try_serialize::<GameObjectKind, _>(archetype, &mut out)?;
         try_serialize::<Owner, _>(archetype, &mut out)?;
         try_serialize::<ResourceNode, _>(archetype, &mut out)?;
         try_serialize::<CoalNode, _>(archetype, &mut out)?;
