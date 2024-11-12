@@ -1,29 +1,39 @@
 use serde::{Deserialize, Serialize};
 
-use crate::objects::GameObjectKind;
+use crate::{constants::structures::GAME_OBJECT_HEALTHS, objects::GameObjectKind};
 
 use super::body::UnitBody;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct Health(pub u32);
+/// Excludes shield health
+pub struct Health {
+    pub current: u32,
+    pub max: u32,
+}
 
 impl Default for Health {
     fn default() -> Self {
-        Self(100)
+        Self {
+            current: 100,
+            max: 100,
+        }
     }
 }
 
 impl Health {
-    pub fn from_kind(kind: GameObjectKind) -> Self {
-        match kind {
-            GameObjectKind::Unit => Self(10),
-            GameObjectKind::Turret => Self(100),
-            _ => Self::default(),
-        }
+    pub fn from_kind(kind: GameObjectKind) -> Option<Self> {
+        let health = *GAME_OBJECT_HEALTHS.get(&kind)?;
+        Some(Self {
+            current: health,
+            max: health,
+        })
     }
 
     pub fn for_unit(body: &UnitBody) -> Self {
-        Self(body.health_without_shields())
+        Self {
+            current: body.max_health(),
+            max: body.max_health(),
+        }
     }
 
     pub fn current_with_shields() {
@@ -32,5 +42,5 @@ impl Health {
 
     pub fn max_with_shields() {
         todo!()
-    }   
+    }
 }

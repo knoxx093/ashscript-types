@@ -61,11 +61,11 @@ impl UnitBody {
         weight
     }
 
-    pub fn health_with_shields(&self, shield: Shield) -> u32 {
-        self.health_without_shields() + shield.health
+    pub fn max_health_with_shields(&self, shield: Shield) -> u32 {
+        self.max_health() + shield.health
     }
 
-    pub fn health_without_shields(&self) -> u32 {
+    pub fn max_health(&self) -> u32 {
         let mut health = 0;
 
         for (part, count) in self.parts.iter() {
