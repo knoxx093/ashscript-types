@@ -14,6 +14,7 @@ pub enum Intent {
     FactorySpawnUnit(FactorySpawnUnit),
     UnitSpawnUnit(UnitSpawnUnit),
     ResourceTransfer(ResourceTransfer),
+    TurretRepair(TurretRepair),
 }
 
 #[derive(enum_map::Enum, Hash, Eq, PartialEq, Clone, Copy, Debug)]
