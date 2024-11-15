@@ -1,3 +1,4 @@
+use hecs::Entity;
 use hexx::Hex;
 
 use crate::{components::body::UnitBody, objects::GameObjectKind, player::PlayerId, resource::Resource};
@@ -82,3 +83,8 @@ pub struct UnitRechargeShield {
     pub amount: Option<u32>,
 }
 
+pub struct TurretRepair {
+    pub turret_hex: Hex,
+    pub target_hex: Hex,
+    pub target_kind: GameObjectKind,
+}

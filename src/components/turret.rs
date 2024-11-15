@@ -14,9 +14,13 @@ impl Turret {
     pub fn attack_cost(&self) -> u32 {
         self.range() + self.damage()
     }
+
+    pub fn heal_amount(&self) -> u32 {
+        5
+    }
     
     pub fn range(&self) -> u32 {
-        1
+        25
     }
     
     pub fn damage(&self) -> u32 {
