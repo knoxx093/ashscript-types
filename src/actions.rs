@@ -15,6 +15,7 @@ pub struct ActionsByKind {
     pub factory_spawn_unit: Vec<FactorySpawnUnit>,
     pub unit_spawn_unit: Vec<UnitSpawnUnit>,
     pub resource_transfer: Vec<ResourceTransfer>,
+    pub turret_repair: Vec<TurretRepair>,
 }
 
 impl ActionsByKind {
@@ -93,3 +94,10 @@ pub struct UnitRechargeShield {
     pub amount: u32,
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct TurretRepair {
+    pub turret_hex: Hex,
+    pub target_hex: Hex,
+    pub target_kind: GameObjectKind,
+    pub amount: u32,
+}
