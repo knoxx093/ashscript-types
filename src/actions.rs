@@ -99,5 +99,6 @@ pub struct TurretRepair {
     pub turret_hex: Hex,
     pub target_hex: Hex,
     pub target_kind: GameObjectKind,
-    pub amount: u32,
+    pub repair: u32,
+    pub cost: u32,
 }
