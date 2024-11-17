@@ -6,9 +6,7 @@ use crate::{
     constants::{
         general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
         unit::{
-            AGE_PER_GEN_PART, BATTERY_ENERGY_CAPACITY, GENERATOR_ENERGY_CAPACITY,
-            GENERATOR_ENERGY_INCOME, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART,
-            UNIT_SHIELD_HEALTH,
+            AGE_PER_GEN_PART, BATTERY_ENERGY_CAPACITY, CONVERT_COST, GENERATOR_ENERGY_CAPACITY, GENERATOR_ENERGY_INCOME, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH
         },
     },
     resource::Resource,
@@ -104,6 +102,34 @@ impl UnitBody {
     pub fn attack_cost(&self) -> u32 {
         self.parts[UnitPart::Ranged]
     }
+
+    pub fn convert_speed(&self) -> u32 {
+        self.parts[UnitPart::Convert]
+    }
+
+    pub fn convert_cost(&self) -> u32 {
+        self.parts[UnitPart::Convert] * CONVERT_COST
+    }
+
+    pub fn fabricate_speed(&self) -> u32 {
+        self.parts[UnitPart::Fabricate]
+    }
+
+    pub fn build_speed(&self) -> u32 {
+        self.parts[UnitPart::Build]
+    }
+
+    pub fn build_efficiency(&self) -> u32 {
+        self.parts[UnitPart::Build]
+    }
+
+    pub fn extract_speed(&self) -> u32 {
+        self.parts[UnitPart::Extract]
+    }
+
+    pub fn extract_efficiency(&self) -> u32 {
+        self.parts[UnitPart::Extract]
+    }
 }
 
 #[derive(enum_map::Enum, Serialize, Deserialize, Clone, Copy, Debug)]
@@ -111,11 +137,12 @@ pub enum UnitPart {
     Ranged,
     Harvest,
     Generate,
-    Work,
     Battery,
     Shield,
     Fabricate,
     Convert,
+    Build,
+    Extract,
     RangeImprovement,
     DamageImprovement,
     GenerateImprovement,
