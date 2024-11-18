@@ -17,10 +17,13 @@ use crate::components::occupies::Occupies;
 use crate::components::owner::Owner;
 use crate::components::resource::{CoalNode, MineralNode, ResourceNode, UraniumNode};
 use crate::components::shield::Shield;
+use crate::components::solar_panel::SolarPanel;
 use crate::components::spawn::Spawning;
 use crate::components::storage::Storage;
+use crate::components::substation::Substation;
 use crate::components::terrain::{Lava, Plain, Terrain, Wall};
 use crate::components::tile::Tile;
+use crate::components::turbine::Turbine;
 use crate::components::turret::Turret;
 use crate::components::unit::Unit;
 use crate::objects::GameObjectKind;
@@ -55,6 +58,9 @@ enum ComponentId {
     Turret,
     Occupies,
     Health,
+    Turbine,
+    SolarPanel,
+    Substation,
 }
 
 // We need to implement context types for the hecs serialization process:
@@ -142,6 +148,15 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Health => {
                     batch.add::<Health>();
                 }
+                ComponentId::Turbine => {
+                    batch.add::<Turbine>();
+                }
+                ComponentId::SolarPanel => {
+                    batch.add::<SolarPanel>();
+                }
+                ComponentId::Substation => {
+                    batch.add::<Substation>();
+                }
             }
             self.components.push(id);
         }
@@ -228,6 +243,15 @@ impl DeserializeContext for SaveContextDeserialize {
                 ComponentId::Health => {
                     deserialize_column::<Health, _>(entity_count, &mut seq, batch)?;
                 }
+                ComponentId::Turbine => {
+                    deserialize_column::<Turbine, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::SolarPanel => {
+                    deserialize_column::<SolarPanel, _>(entity_count, &mut seq, batch)?;
+                }
+                ComponentId::Substation => {
+                    deserialize_column::<Substation, _>(entity_count, &mut seq, batch)?;
+                }
             }
         }
         Ok(())
@@ -261,6 +285,9 @@ impl SerializeContext for SaveContextSerialize {
                     || t == TypeId::of::<Distributor>()
                     || t == TypeId::of::<Occupies>()
                     || t == TypeId::of::<Health>()
+                    || t == TypeId::of::<Turbine>()
+                    || t == TypeId::of::<SolarPanel>()
+                    || t == TypeId::of::<Substation>()
             })
             .count()
     }
@@ -293,6 +320,9 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize_id::<Distributor, _, _>(archetype, &ComponentId::Distributor, &mut out)?;
         try_serialize_id::<Occupies, _, _>(archetype, &ComponentId::Occupies, &mut out)?;
         try_serialize_id::<Health, _, _>(archetype, &ComponentId::Health, &mut out)?;
+        try_serialize_id::<Turbine, _, _>(archetype, &ComponentId::Turbine, &mut out)?;
+        try_serialize_id::<SolarPanel, _, _>(archetype, &ComponentId::SolarPanel, &mut out)?;
+        try_serialize_id::<Substation, _, _>(archetype, &ComponentId::Substation, &mut out)?;
         out.end()
     }
 
@@ -324,6 +354,9 @@ impl SerializeContext for SaveContextSerialize {
         try_serialize::<Distributor, _>(archetype, &mut out)?;
         try_serialize::<Occupies, _>(archetype, &mut out)?;
         try_serialize::<Health, _>(archetype, &mut out)?;
+        try_serialize::<Turbine, _>(archetype, &mut out)?;
+        try_serialize::<SolarPanel, _>(archetype, &mut out)?;
+        try_serialize::<Substation, _>(archetype, &mut out)?;
         out.end()
     }
 }

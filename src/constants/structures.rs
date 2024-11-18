@@ -20,3 +20,6 @@ lazy_static! {
         (GameObjectKind::Assembler, 100)
     ]);
 }
+
+pub const WIND_OUTPUT: u32 = 10;
+pub const SOLAR_OUTPUT: u32 = 80;

@@ -15,6 +15,8 @@ pub type Chunks = HashMap<Hex, Chunk>;
 pub struct Chunk {
     pub hex: Hex,
     pub entities: EnumMap<GameObjectKind, HashMap<Hex, Entity>>,
+    pub solar_efficiency: f32,
+    pub wind_efficiency: f32,
 }
 
 impl Chunk {

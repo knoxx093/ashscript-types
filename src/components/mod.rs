@@ -15,3 +15,6 @@ pub mod assembler;
 pub mod distributor;
 pub mod unit;
 pub mod occupies;
+pub mod substation;
+pub mod turbine;
+pub mod solar_panel;
