@@ -4,7 +4,7 @@ use crate::{constants::structures::GAME_OBJECT_ENERGY_CAPACITIES, objects::GameO
 
 use super::body::UnitBody;
 
-#[derive(Default, Serialize, Deserialize, Clone, Debug)]
+#[derive(Default, Serialize, Deserialize, Clone, Copy, Debug)]
 pub struct Energy {
     pub current: u32,
     pub capacity: u32,

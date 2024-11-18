@@ -4,7 +4,7 @@ use crate::{constants::structures::GAME_OBJECT_HEALTHS, objects::GameObjectKind}
 
 use super::body::UnitBody;
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Copy, Debug)]
 /// Excludes shield health
 pub struct Health {
     pub current: u32,
