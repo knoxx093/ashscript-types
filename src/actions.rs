@@ -16,6 +16,7 @@ pub struct ActionsByKind {
     pub unit_spawn_unit: Vec<UnitSpawnUnit>,
     pub resource_transfer: Vec<ResourceTransfer>,
     pub turret_repair: Vec<TurretRepair>,
+    pub substation_collect: Vec<SubstationCollect>,
 }
 
 impl ActionsByKind {
@@ -101,4 +102,10 @@ pub struct TurretRepair {
     pub target_kind: GameObjectKind,
     pub repair: u32,
     pub cost: u32,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct SubstationCollect {
+    pub substation_hex: Hex,
+    pub energy_collected: u32,
 }
