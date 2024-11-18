@@ -12,6 +12,9 @@ pub enum GameObjectKind {
     Distributor,
     Assembler,
     Terrain,
+    Turbine,
+    SolarPanel,
+    Substation,
     #[default]
     Unknown,
 }
