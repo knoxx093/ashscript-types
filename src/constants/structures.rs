@@ -19,6 +19,14 @@ lazy_static! {
         (GameObjectKind::Distributor, 100),
         (GameObjectKind::Assembler, 100)
     ]);
+
+    pub static ref GAME_OBJECT_ENERGY_CAPACITIES: HashMap<GameObjectKind, u32> = HashMap::from_iter([
+        (GameObjectKind::Turret, 10_000),
+        (GameObjectKind::Distributor, 10_000),
+        (GameObjectKind::Substation, 100_000),
+    ]);
+
+    
 }
 
 pub const WIND_OUTPUT: u32 = 10;
