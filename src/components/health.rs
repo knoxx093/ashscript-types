@@ -21,12 +21,14 @@ impl Default for Health {
 }
 
 impl Health {
-    pub fn from_kind(kind: GameObjectKind) -> Option<Self> {
-        let health = *GAME_OBJECT_HEALTHS.get(&kind)?;
-        Some(Self {
-            current: health,
-            max: health,
-        })
+    pub fn from_kind(kind: GameObjectKind) -> Self {
+        let Some(health) = GAME_OBJECT_HEALTHS.get(&kind) else {
+            return Default::default();
+        };
+        Self {
+            current: *health,
+            max: *health,
+        }
     }
 
     pub fn for_unit(body: &UnitBody) -> Self {

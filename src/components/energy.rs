@@ -18,13 +18,15 @@ impl Energy {
         }
     }
 
-    pub fn for_structure(kind: &GameObjectKind) -> Option<Self> {
+    pub fn for_structure(kind: &GameObjectKind) -> Self {
 
-        let capacity = *GAME_OBJECT_ENERGY_CAPACITIES.get(kind)?;
+        let Some(capacity) = GAME_OBJECT_ENERGY_CAPACITIES.get(kind) else {
+            return Default::default();
+        };
 
-        Some(Self {
-            capacity,
+        Self {
+            capacity: *capacity,
             ..Default::default()
-        })
+        }
     }
 }
