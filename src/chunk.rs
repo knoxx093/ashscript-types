@@ -20,9 +20,11 @@ pub struct Chunk {
 }
 
 impl Chunk {
-    pub fn new(hex: Hex) -> Self {
+    pub fn new(hex: Hex, noise: f64) -> Self {
         Self {
             hex,
+            solar_efficiency: noise as f32,
+            wind_efficiency: noise as f32,
             ..Default::default()
         }
     }
