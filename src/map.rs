@@ -51,14 +51,14 @@ impl Map {
         let mut chunks = Vec::new();
 
         for search_hex in hexagon(hex, radius) {
-            let chunk_hex = hex.to_lower_res(CHUNK_SIZE);
+            let chunk_hex = search_hex.to_lower_res(CHUNK_SIZE);
             if found_chunk_hexes.contains(&chunk_hex) {
                 continue;
             }
 
             found_chunk_hexes.insert(chunk_hex);
 
-            if let Some(chunk) = self.chunk_at(&search_hex) {
+            if let Some(chunk) = self.chunks.get(&chunk_hex) {
                 chunks.push(chunk);
             }
         }
