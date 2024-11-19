@@ -3,8 +3,10 @@ use std::time::Duration;
 use hashbrown::HashMap;
 use serde::{Deserialize, Serialize};
 
-use crate::player::{Player, PlayerId};
-
+use crate::{
+    constants::general::{DAY_LENGTH, NIGHT_LENGTH},
+    player::{Player, PlayerId},
+};
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct Global {
@@ -18,5 +20,13 @@ impl Global {
         Self {
             ..Default::default()
         }
+    }
+
+    pub fn is_day(&self) -> bool {
+        (self.tick + NIGHT_LENGTH) % DAY_LENGTH > NIGHT_LENGTH
+    }
+
+    pub fn is_night(&self) -> bool {
+        !self.is_day()
     }
 }

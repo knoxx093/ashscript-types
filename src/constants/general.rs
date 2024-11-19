@@ -34,3 +34,8 @@ pub enum IntentReturnCode {
     WrongArgument,
     OutOfRange,
 }
+
+/// The length of a whole day (including night) in terms of ticks
+pub const DAY_LENGTH: u64 = 250;
+/// The length of time out of day that is night
+pub const NIGHT_LENGTH: u64 = 80;
