@@ -7,3 +7,4 @@ pub const GENERATOR_ENERGY_CAPACITY: u32 = 50;
 pub const BATTERY_ENERGY_CAPACITY: u32 = 500;
 pub const GENERATOR_ENERGY_INCOME: u32 = 2;
 pub const CONVERT_COST: u32 = 50;
+pub const EXTRACT_PART_COST: u32 = 2;

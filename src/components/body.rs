@@ -6,7 +6,7 @@ use crate::{
     constants::{
         general::{UNIT_PART_COSTS, UNIT_PART_WEIGHTS},
         unit::{
-            AGE_PER_GEN_PART, BATTERY_ENERGY_CAPACITY, CONVERT_COST, GENERATOR_ENERGY_CAPACITY, GENERATOR_ENERGY_INCOME, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH
+            AGE_PER_GEN_PART, BATTERY_ENERGY_CAPACITY, CONVERT_COST, EXTRACT_PART_COST, GENERATOR_ENERGY_CAPACITY, GENERATOR_ENERGY_INCOME, UNIT_AGE_EXP, UNIT_BASE_AGE, UNIT_HEALTH_PER_PART, UNIT_SHIELD_HEALTH
         },
     },
     resource::Resource,
@@ -129,6 +129,10 @@ impl UnitBody {
 
     pub fn extract_efficiency(&self) -> u32 {
         self.parts[UnitPart::Extract]
+    }
+
+    pub fn extract_cost(&self) -> u32 {
+        self.parts[UnitPart::Extract] * EXTRACT_PART_COST
     }
 }
 
