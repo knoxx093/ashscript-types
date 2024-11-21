@@ -15,6 +15,7 @@ pub enum GameObjectKind {
     Turbine,
     SolarPanel,
     Substation,
+    ResourceNode,
     #[default]
     Unknown,
 }
