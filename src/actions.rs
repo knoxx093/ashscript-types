@@ -116,4 +116,5 @@ pub struct ExtractResource {
     pub unit_hex: Hex,
     pub node_hex: Hex,
     pub amount: u32,
+    pub cost: u32,
 }
