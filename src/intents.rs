@@ -89,3 +89,8 @@ pub struct TurretRepair {
     pub target_hex: Hex,
     pub target_kind: GameObjectKind,
 }
+
+pub struct ExtractResource {
+    pub unit_hex: Hex,
+    pub node_hex: Hex,
+}

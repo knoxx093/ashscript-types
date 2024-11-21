@@ -29,4 +29,14 @@ impl Global {
     pub fn is_night(&self) -> bool {
         !self.is_day()
     }
+
+    /// Returns none if it is night
+    pub fn time_to_night(&self) -> Option<u64> {
+        let time_to = (self.tick + NIGHT_LENGTH) % DAY_LENGTH;
+        if time_to < NIGHT_LENGTH {
+            return None
+        }
+
+        Some(time_to)
+    }
 }

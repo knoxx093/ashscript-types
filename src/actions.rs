@@ -17,6 +17,7 @@ pub struct ActionsByKind {
     pub resource_transfer: Vec<ResourceTransfer>,
     pub turret_repair: Vec<TurretRepair>,
     pub substation_collect: Vec<SubstationCollect>,
+    pub extract_resource: Vec<ExtractResource>,
 }
 
 impl ActionsByKind {
@@ -108,4 +109,11 @@ pub struct TurretRepair {
 pub struct SubstationCollect {
     pub substation_hex: Hex,
     pub energy_collected: u32,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct ExtractResource {
+    pub unit_hex: Hex,
+    pub node_hex: Hex,
+    pub amount: u32,
 }

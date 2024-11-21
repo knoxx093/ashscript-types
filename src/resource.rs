@@ -1,7 +1,10 @@
+use std::default;
+
 use serde::{Deserialize, Serialize};
 
-#[derive(enum_map::Enum, Hash, Eq, PartialEq, Clone, Copy, Debug, Serialize, Deserialize,)]
+#[derive(Default, enum_map::Enum, Hash, Eq, PartialEq, Clone, Copy, Debug, Serialize, Deserialize,)]
 pub enum Resource {
+    #[default]
     Coal,
     Minerals,
     Scrap,

@@ -1,15 +1,19 @@
 use serde::{Deserialize, Serialize};
 
+use crate::resource::Resource;
+
 
 #[derive(Default, Serialize, Deserialize, Clone, Debug)]
 pub struct ResourceNode {
-    pub amount: u32
+    pub amount: u32,
+    pub resource: Resource,
 }
 
 impl ResourceNode {
-    pub fn new(amount: u32) -> Self {
+    pub fn new(amount: u32, resource: Resource) -> Self {
         Self {
-            amount
+            amount,
+            resource,
         }
     }
 }
