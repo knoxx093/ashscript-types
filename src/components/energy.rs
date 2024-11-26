@@ -29,4 +29,8 @@ impl Energy {
             ..Default::default()
         }
     }
+
+    pub fn remove_energy(&mut self, amount: u32) {
+        self.current = self.current.saturating_sub(amount).min(0)
+    }
 }
