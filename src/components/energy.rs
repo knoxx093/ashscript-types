@@ -31,6 +31,10 @@ impl Energy {
     }
 
     pub fn remove_energy(&mut self, amount: u32) {
-        self.current = self.current.saturating_sub(amount).min(0)
+        self.current = self.current.saturating_sub(amount).max(0);
+    }
+
+    pub fn add_energy(&mut self, amount: u32) {
+        self.current = self.current.saturating_add(amount).min(self.capacity);
     }
 }
